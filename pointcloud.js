@@ -9,8 +9,8 @@ const DESKTOP_POINT_COUNT = 1800;
 const MOBILE_POINT_COUNT = 700;
 const MOBILE_BREAKPOINT_PX = 600;
 
-const COLOR_POINTS = 0xe8e2d8; // warm off-white
-const COLOR_TRAJECTORY = 0xc9834f; // muted copper/amber
+const COLOR_POINTS = 0xe3ebf1; // cool ice white
+const COLOR_TRAJECTORY = 0x5b93c9; // steel blue, matches --accent
 
 const ROOM_WIDTH = 6;
 const ROOM_HEIGHT = 3.2;

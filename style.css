@@ -1,13 +1,13 @@
 :root {
   color-scheme: dark;
 
-  --bg: #14120f;
-  --bg-raised: #1a1714;
-  --ink: #e8e2d8;
-  --ink-dim: #a89e8f;
-  --accent: #c9834f;
-  --accent-2: #4f9c93;
-  --rule: #2a2620;
+  --bg: #0b1116;
+  --bg-raised: #141d24;
+  --ink: #e3ebf1;
+  --ink-dim: #86969f;
+  --accent: #5b93c9;
+  --accent-2: #52c2b8;
+  --rule: #202c35;
 
   --font-body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "Martian Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -100,32 +100,6 @@ a:focus-visible {
   .site-nav {
     transition: none;
   }
-}
-
-/* ---------- Stats ---------- */
-
-.stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
-  gap: 2rem;
-  max-width: 62rem;
-  margin: 0;
-  padding: 3.5rem 1.5rem 3.5rem clamp(1.5rem, 8vw, 6rem);
-  text-align: left;
-}
-
-.stat-number {
-  font-family: var(--font-mono);
-  font-size: clamp(1.75rem, 3vw + 1rem, 2.5rem);
-  font-weight: 700;
-  color: var(--accent);
-  margin: 0 0 0.4rem;
-}
-
-.stat-caption {
-  font-size: 0.875rem;
-  color: var(--ink-dim);
-  margin: 0;
 }
 
 /* ---------- Hero ---------- */

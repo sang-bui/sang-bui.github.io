@@ -211,14 +211,21 @@ main {
 .work,
 .about {
   position: relative;
-  max-width: 42rem;
   margin: 0;
   padding: 5rem 1.5rem 5rem clamp(1.5rem, 8vw, 6rem);
   border-top: 1px solid var(--rule);
-  /* A faint dot grid gives the section some texture instead of flat dark. */
+  /* The section itself runs full width, so the dot grid fills the whole
+     row instead of stopping in a box on the left; the text column is
+     capped separately below so lines stay readable. */
   background-image: radial-gradient(var(--rule) 1px, transparent 1px);
   background-size: 22px 22px;
   background-position: -11px -11px;
+}
+
+.work article,
+.work > .tags,
+.about > p {
+  max-width: 40rem;
 }
 
 .section-head {

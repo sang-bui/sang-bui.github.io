@@ -5,32 +5,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sang Bui</title>
   <meta name="description" content="Sang Bui — autonomy &amp; robotics research, applied data science, and full-stack AI engineering.">
+  <meta property="og:title" content="Sang Bui">
+  <meta property="og:description" content="Autonomy &amp; robotics research, applied data science, and full-stack AI engineering — Colorado School of Mines.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Sang Bui">
+  <meta name="twitter:description" content="Autonomy &amp; robotics research, applied data science, and full-stack AI engineering — Colorado School of Mines.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Martian+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 <body>
 
   <header class="hero">
     <canvas id="pointcloud" aria-hidden="true"></canvas>
     <div class="hero-content">
-      <p class="kicker">sang bui</p>
-      <h1>I build systems that turn data into decisions.</h1>
-      <p class="hero-line">
-        Autonomy &amp; robotics research, applied data science, and full-stack AI
-        engineering &mdash; Computer Science + Data Science, Colorado School of Mines.
-      </p>
-      <nav class="hero-links" aria-label="Contact">
-        <a href="mailto:sang_bui@mines.edu">sang_bui@mines.edu</a>
-        <a href="https://linkedin.com/in/buisang" target="_blank" rel="noopener">linkedin.com/in/buisang</a>
-      </nav>
+      <h1 class="hero-name">Sang Bui</h1>
+      <ul class="hero-fragments">
+        <li><a href="#autonomy">autonomy</a></li>
+        <li><a href="#data-science">data science</a></li>
+        <li><a href="#ai-engineering">ai engineering</a></li>
+      </ul>
     </div>
+    <nav class="hero-links" aria-label="Contact">
+      <a href="mailto:sang_bui@mines.edu">sang_bui@mines.edu</a>
+      <a href="https://linkedin.com/in/buisang" target="_blank" rel="noopener">linkedin.com/in/buisang</a>
+    </nav>
   </header>
 
   <main>
 
-    <section class="work" id="autonomy">
+    <section class="stats reveal" aria-label="A few numbers">
+      <div class="stat">
+        <p class="stat-number">2,000+</p>
+        <p class="stat-caption">internal systems served by a shipped GenAI app</p>
+      </div>
+      <div class="stat">
+        <p class="stat-number">124-yr</p>
+        <p class="stat-caption">global drought dataset generated, 1901&ndash;2024</p>
+      </div>
+      <div class="stat">
+        <p class="stat-number">75+</p>
+        <p class="stat-caption">students supported as a teaching assistant</p>
+      </div>
+      <div class="stat">
+        <p class="stat-number">5</p>
+        <p class="stat-caption">LiDAR SLAM systems evaluated for an automotive client</p>
+      </div>
+    </section>
+
+    <section class="work reveal" id="autonomy">
       <div class="section-head">
         <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
           <circle cx="12" cy="12" r="2.4"/>
@@ -67,7 +93,7 @@
       </article>
     </section>
 
-    <section class="work" id="data-science">
+    <section class="work reveal" id="data-science">
       <div class="section-head">
         <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
           <polyline points="2.5 17 8 10.5 12 14 21.5 4.5"/>
@@ -106,7 +132,7 @@
       </article>
     </section>
 
-    <section class="work" id="ai-engineering">
+    <section class="work reveal" id="ai-engineering">
       <div class="section-head">
         <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
           <circle cx="5" cy="12" r="2.2"/>
@@ -127,6 +153,43 @@
           <li>Built a full-stack application with a React/TypeScript frontend and FastAPI/Python backend, integrating LangChain and LangGraph for multi-step query and visualization workflows.</li>
           <li>Implemented retrieval-augmented generation with a local vector store, containerized with Docker for reproducible deployment.</li>
         </ul>
+
+        <div class="case-study">
+          <h4>system architecture</h4>
+          <div class="case-study-body">
+            <div class="case-study-diagram">
+              <svg class="pipeline-diagram" viewBox="0 0 480 160" fill="none" stroke="currentColor" stroke-width="1.5" role="img" aria-label="Pipeline diagram: a natural-language query flows into a LangGraph orchestration node, which branches into a RAG vector-store lookup and SQL generation, merging into a visualization output.">
+                <line x1="88" y1="88" x2="136" y2="88"/>
+                <line x1="206" y1="76" x2="270" y2="33"/>
+                <line x1="207" y1="97" x2="270" y2="129"/>
+                <line x1="382" y1="33" x2="406" y2="88"/>
+                <line x1="382" y1="129" x2="406" y2="88"/>
+
+                <rect x="8" y="66" width="80" height="44" rx="6"/>
+                <circle cx="172" cy="88" r="36"/>
+                <circle cx="172" cy="88" r="2" fill="currentColor" stroke="none"/>
+                <circle cx="206" cy="76" r="2" fill="currentColor" stroke="none"/>
+                <circle cx="207" cy="97" r="2" fill="currentColor" stroke="none"/>
+                <rect x="270" y="12" width="112" height="42" rx="6"/>
+                <rect x="270" y="108" width="112" height="42" rx="6"/>
+                <rect x="406" y="68" width="66" height="40" rx="6"/>
+
+                <text x="48" y="92" text-anchor="middle">query</text>
+                <text x="48" y="124" text-anchor="middle" class="pipeline-caption">(natural language)</text>
+                <text x="172" y="85" text-anchor="middle">LangGraph</text>
+                <text x="172" y="98" text-anchor="middle" class="pipeline-caption">orchestration</text>
+                <text x="326" y="29" text-anchor="middle">RAG</text>
+                <text x="326" y="41" text-anchor="middle" class="pipeline-caption">vector store</text>
+                <text x="326" y="133" text-anchor="middle">SQL generation</text>
+                <text x="439" y="91" text-anchor="middle" class="pipeline-caption">visualization</text>
+              </svg>
+            </div>
+            <p class="metric-callout">
+              <span class="metric-number">2,000+</span>
+              <span class="metric-caption">internal cellular test systems supported</span>
+            </p>
+          </div>
+        </div>
       </article>
 
       <article>
@@ -144,7 +207,7 @@
       </p>
     </section>
 
-    <section class="about" id="about">
+    <section class="about reveal" id="about">
       <p class="section-tag">education</p>
       <h2>B.S. Computer Science, Data Science Specialization</h2>
       <p class="meta">Colorado School of Mines, Golden, CO &middot; Aug 2023 &ndash; Dec 2026</p>
@@ -173,6 +236,10 @@
     import { initPointCloud } from "./pointcloud.js";
     const canvas = document.getElementById("pointcloud");
     if (canvas) initPointCloud(canvas);
+  </script>
+  <script type="module">
+    import { initReveal } from "./reveal.js";
+    initReveal();
   </script>
 
 </body>

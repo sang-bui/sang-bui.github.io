@@ -1,34 +1,253 @@
-/* A deliberately small starting point.
-   It exists to prove one thing: this file is loading.
-   If you can see spacing and a readable line length, the path in index.html works.
-
-   Delete all of it whenever you want. */
-
 :root {
-  /* Makes the page follow the reader's light or dark mode setting, for free. */
-  color-scheme: light dark;
+  color-scheme: dark;
+
+  --bg: #14120f;
+  --bg-raised: #1a1714;
+  --ink: #e8e2d8;
+  --ink-dim: #a89e8f;
+  --accent: #c9834f;
+  --rule: #2a2620;
+
+  --font-body: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-
-  /* 65ch caps the line at about 65 characters. Long lines are genuinely hard
-     to read, and this single rule does more for legibility than anything else
-     in this file. */
-  max-width: 65ch;
-
-  margin: 0 auto;
-  padding: 4rem 1.5rem;
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
   line-height: 1.6;
+  font-size: 1.0625rem;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--ink);
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  position: relative;
+  min-height: 74svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  /* Fallback in case the point-cloud script fails or WebGL is unavailable:
+     the canvas is transparent, so this shows through underneath it. */
+  background: radial-gradient(ellipse at 50% 30%, var(--bg-raised), var(--bg) 70%);
+}
+
+#pointcloud {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  /* Keeps the visual as a quiet backdrop detail rather than the loudest
+     thing on the screen, and fades it into the page at the edges. */
+  opacity: 0.55;
+  mask-image: radial-gradient(ellipse at 50% 40%, black 45%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 40%, black 45%, transparent 85%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.kicker,
+.section-tag {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--accent);
+  margin: 0 0 1rem;
+}
+
+/* Only the short hero kicker is uppercased; the longer section labels
+   ("03 — full-stack + ai engineering") stay lowercase so they read as
+   words, not a long all-caps block that's harder to scan. */
+.kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw + 1rem, 3.25rem);
+  line-height: 1.15;
+  font-weight: 600;
+  margin: 0 0 1.25rem;
+}
+
+.hero-line {
+  color: var(--ink-dim);
   font-size: 1.125rem;
+  max-width: 38rem;
+  margin: 0 auto 2rem;
 }
 
-h1 {
-  font-size: 3rem;
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
+.hero-links {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-family: var(--font-mono);
+  font-size: 0.9375rem;
 }
 
-p {
-  margin-bottom: 1.5rem;
+/* ---------- Work sections ---------- */
+
+main {
+  position: relative;
+  z-index: 1;
+  background: var(--bg);
+}
+
+.work,
+.about {
+  position: relative;
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 5rem 1.5rem;
+  border-top: 1px solid var(--rule);
+  /* A faint dot grid gives the section some texture instead of flat dark. */
+  background-image: radial-gradient(var(--rule) 1px, transparent 1px);
+  background-size: 22px 22px;
+  background-position: -11px -11px;
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.section-tag {
+  margin: 0;
+}
+
+.section-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.work h2,
+.about h2 {
+  font-size: clamp(1.375rem, 2vw + 1rem, 1.75rem);
+  line-height: 1.3;
+  font-weight: 600;
+  margin: 0 0 2.5rem;
+  max-width: 32rem;
+}
+
+article {
+  margin-bottom: 2.5rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--rule);
+}
+
+article:last-of-type {
+  margin-bottom: 0;
+}
+
+article:hover {
+  border-left-color: var(--accent);
+}
+
+article h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0 0 0.35rem;
+  color: var(--ink);
+}
+
+.meta {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--ink-dim);
+  margin: 0 0 0.9rem;
+}
+
+article ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+article li {
+  margin-bottom: 0.6rem;
+  color: var(--ink-dim);
+}
+
+article li:last-child {
+  margin-bottom: 0;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 2rem 0 0;
+}
+
+.tags span {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
+}
+
+.about p:not(.meta) {
+  color: var(--ink-dim);
+}
+
+/* ---------- Footer ---------- */
+
+footer {
+  border-top: 1px solid var(--rule);
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--ink-dim);
+}
+
+/* ---------- Motion & accessibility ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .work,
+  .about {
+    padding: 3.5rem 1.25rem;
+  }
 }

@@ -1,0 +1,35 @@
+{
+  "updated_at": "2026-09-22T07:51:12Z",
+  "artists": [
+    {
+      "name": "Lucky Daye",
+      "genre": null,
+      "image": "https://i.scdn.co/image/ab6761610000f178b5a3c08b793ddef890d04133"
+    },
+    {
+      "name": "wave to earth",
+      "genre": null,
+      "image": "https://i.scdn.co/image/ab6761610000f17811fa75d331351ecfc2e93faf"
+    },
+    {
+      "name": "Don Toliver",
+      "genre": null,
+      "image": "https://i.scdn.co/image/ab6761610000f178c52b798deb89eb8414a51b7b"
+    },
+    {
+      "name": "Leon Thomas",
+      "genre": null,
+      "image": "https://i.scdn.co/image/ab6761610000f178c6c4f4aaf40ebee92b8a8228"
+    },
+    {
+      "name": "Khamari",
+      "genre": "indie r&b",
+      "image": "https://i.scdn.co/image/ab6761610000f1786921bdf2ddc6e84970fd172e"
+    },
+    {
+      "name": "Kanye West",
+      "genre": "rap",
+      "image": "https://i.scdn.co/image/ab6761610000f1786e835a500e791bf9c27a422a"
+    }
+  ]
+}

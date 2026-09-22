@@ -2,6 +2,17 @@
 
 This is a working trace of the homepage build, kept separate from `DECISIONS.md` (which is Sang's own log, not something Claude fills in). It exists so nothing gets lost before the video and the decision log get written, especially the moments where a direction got built, then overruled or reverted. Sourced from the actual session; nothing here is invented.
 
+## Where things stand right now (as of 2026-09-21, commit `18cacd6`)
+
+The rest of this file is a history of how it got here; this section is what's actually live, for anyone (or any new Claude session) picking this up cold.
+
+- **Layout**: fixed-left / scrolling-right, per brittanychiang.com. `.page-shell` (grid) → `.side-panel` (sticky left: point cloud backdrop, name "Sang Bui", role line, vertical nav that highlights the in-view section via `reveal.js`'s `IntersectionObserver`, email + LinkedIn) and `.content-column` (scrolling right: three work sections, about, footer). Collapses to one stacked column under 900px.
+- **Visuals**: one deliberate animated visual, the hero-area SLAM-style point cloud (`pointcloud.js`, Three.js via CDN, explicitly synthetic). No per-section decoration, texture, or diagrams, both of those were tried and removed (see below).
+- **Palette**: cool/technical, deep blue-black ground, steel-blue (`--accent`) + ice-cyan (`--accent-2`, scoped to `#data-science` only) accents. Type: Public Sans (body), Martian Mono (labels/data), Unbounded (the name only).
+- **Content**: three work sections (autonomy & robotics, applied data science, full-stack + AI engineering) with real resume-backed bullets, no diagram, no case-study box, no stats strip, no per-section sidebar, all of those existed at some point and were cut. About section has no GPA (Sang's preference). Footer repeats contact links.
+- **Not yet done**: `verification/`, `DECISIONS.md` (all five prompts, Sang's own), the video, peer comments, and the planned NCAR-notebook interactive work (see below, not started).
+- Live at [sang-bui.github.io](https://sang-bui.github.io); `main` branch is the only branch and is fully pushed.
+
 ## Setup
 
 - Started from the P1 template (`Mines-Coding-with-AI-Agents/P1-personal-website`), cloned into `work/p1-website`, GitHub Pages enabled on `main` / root.
@@ -58,3 +69,7 @@ Sang wants to bring in Jupyter notebooks from the NSF NCAR drought/PDSI research
 
 - `verification/`, the video, and peer comments are not started yet.
 - The interactive NCAR notebook work above.
+
+## Picking this back up on a different computer
+
+Everything in this repo is fully pushed (see "Where things stand right now" above for the exact commit). One thing is NOT in this repo and won't come along with a clone: the [Impeccable](https://github.com/pbakaus/impeccable) skill is installed globally (`~/.claude`) on the machine this was built on, not tracked by git at all. On a new machine, run `npx impeccable install` again (choose global) before expecting `/impeccable` or `impeccable detect` to work there.

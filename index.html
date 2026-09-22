@@ -42,6 +42,16 @@
 
     <main class="content-column">
 
+    <section class="career-timeline reveal">
+      <p class="career-timeline-label">career trajectory</p>
+      <div class="timeline-canvas-wrap">
+        <canvas id="career-timeline-canvas" aria-hidden="true"></canvas>
+        <div id="career-timeline-labels" class="timeline-labels"></div>
+      </div>
+      <p id="career-timeline-detail" class="timeline-detail">Hover or click a point on the path for details.</p>
+      <nav id="career-timeline-a11y" class="timeline-a11y-nav" aria-label="Career milestones"></nav>
+    </section>
+
     <section class="work reveal" id="autonomy">
       <div class="work-content">
         <div class="section-head">
@@ -61,6 +71,7 @@
             <li>Researched, containerized, and integrated Structure PLP-SLAM into the lab's automated benchmarking workflow for evaluation across baseline and degraded visual conditions.</li>
             <li>Built Python and Bash tooling for multi-system SLAM execution, dataset/trajectory prep, experiment configuration, runtime analysis, and comparative visualization.</li>
             <li>Created synthetic-noise datasets and OpenCV-based denoising pipelines to evaluate visual SLAM robustness under controlled degradation.</li>
+            <li>Built reusable EVO-based analysis tools for measuring tracking completion, pose count, runtime, initialization and failure behavior, and positional deviation.</li>
             <li>Diagnosed build, dependency, GPU, container, and configuration failures across Structure PLP-SLAM, DPVO, MASt3R-SLAM, and DSO.</li>
           </ul>
         </article>
@@ -101,6 +112,11 @@
             <li>Extended the research through SPI-48 and SPEI-48 analysis across the U.S. Great Plains, identifying a post-1980 heat-driven drought penalty.</li>
             <li>Presented findings on PDSI limitations to 10+ senior scientists and an audience of 30+ at the NSF NCAR Summer Symposium.</li>
           </ul>
+
+          <a class="poster-link" href="images/pdsi-poster-full.png" target="_blank" rel="noopener">
+            <img src="images/pdsi-poster-thumb.png" alt="Thumbnail of the research poster, &ldquo;Evaluating the Palmer Drought Severity Index (PDSI) in a Changing Global Climate,&rdquo; the full poster opens at full resolution in a new tab.">
+            <span>View the full poster &#8599;</span>
+          </a>
         </article>
 
         <article>
@@ -108,6 +124,7 @@
           <p class="meta">CS@Mines, Colorado School of Mines &middot; Sep 2023 &ndash; May 2025</p>
           <ul>
             <li>Conducted cybersecurity and privacy research examining server resource utilization and related risks in cloud-gaming systems.</li>
+            <li>Performed laboratory measurements of server thermal output using FLIR imaging and maintained structured experimental datasets for analysis.</li>
             <li>Co-created and presented research at the 2025 Spring Undergraduate Research Symposium; preserved with DOI <a href="https://doi.org/10.25676/11124/180538" target="_blank" rel="noopener">10.25676/11124/180538</a>.</li>
           </ul>
         </article>
@@ -116,9 +133,29 @@
           <h3>Selected research outputs</h3>
           <ul>
             <li>S. Bui and N. Lenssen, &ldquo;The Temperature Penalty: Using SPI and SPEI to Quantify the Impact of Climate Change on 21st-Century Droughts,&rdquo; research poster, Colorado School of Mines and NSF NCAR.</li>
-            <li>S. Bui, N. Lenssen, et al., &ldquo;Palmer Drought Severity Index (PDSI),&rdquo; NSF NCAR Climate Data Guide, Oct 2025.</li>
+            <li>S. Bui, N. Lenssen, et al., &ldquo;Palmer Drought Severity Index (PDSI),&rdquo; NSF NCAR Climate Data Guide, Oct 2025. <a href="https://climatedataguide.ucar.edu/climate-data/palmer-drought-severity-index-pdsi" target="_blank" rel="noopener">Read it &#8599;</a></li>
+            <li>S. Bui and G. Liu, &ldquo;Benchmarking and exploiting resource utilization in cloud gaming: security and privacy challenges,&rdquo; research poster, 2025 Spring Undergraduate Research Symposium, Golden, CO. DOI <a href="https://doi.org/10.25676/11124/180538" target="_blank" rel="noopener">10.25676/11124/180538</a>.</li>
           </ul>
+
+          <figure class="poster-figure">
+            <img src="images/spi-spei-drought-trend.png" alt="Chart comparing SPI (precipitation-only) and SPEI (precipitation plus heat) drought indices from 1901 to 2024, with the Dust Bowl era and modern aridification periods highlighted, showing the two indices diverging in recent decades as temperature increasingly drives drought severity.">
+            <figcaption>From &ldquo;The Temperature Penalty&rdquo; poster: SPI vs. SPEI, 1901&ndash;2024.</figcaption>
+          </figure>
         </article>
+
+        <div class="drought-explorer">
+          <p class="drought-explorer-label">PDSI explorer &mdash; real output from the reimplementation above</p>
+          <div id="drought-explorer"></div>
+          <p class="drought-explorer-caption">
+            Palmer Drought Severity Index, roughly &minus;4 (severe drought) to +6 (very wet).
+            Pick a location to see its real computed value at three historically notable dates.
+          </p>
+        </div>
+
+        <p class="tags">
+          <span>Python</span><span>R</span><span>Dask</span><span>SciPy</span><span>TensorFlow</span>
+          <span>xarray</span><span>NetCDF</span><span>OpenCV</span><span>EVO</span>
+        </p>
       </div>
     </section>
 
@@ -155,9 +192,10 @@
         </article>
 
         <p class="tags">
-          <span>Python</span><span>C++</span><span>SQL</span><span>TypeScript</span>
-          <span>React</span><span>FastAPI</span><span>LangChain</span><span>LangGraph</span>
-          <span>Docker</span><span>NumPy</span><span>pandas</span><span>scikit-learn</span>
+          <span>Python</span><span>C++</span><span>Java</span><span>SQL</span><span>Bash</span><span>TypeScript</span>
+          <span>React</span><span>FastAPI</span><span>Flask</span><span>LangChain</span><span>LangGraph</span><span>vector databases</span>
+          <span>Docker</span><span>Git</span><span>Linux</span><span>Conda</span><span>HPC</span><span>Jupyter</span><span>JIRA</span>
+          <span>NumPy</span><span>pandas</span><span>scikit-learn</span>
         </p>
       </div>
     </section>
@@ -170,7 +208,9 @@
         C-MAPP Scholar (2x), Mines Undergraduate Research Fellowship (MURF) Scholar (2x),
         Summer Undergraduate Research Fellowship (SURF) Scholar, and FIRST Scholar.
         Also selected for the competitive, fully funded MATE FLOATS Marine Technology
-        Workshop at the University of Washington, Aug 2025.
+        Workshop at the University of Washington, Aug 2025, where I built a custom sensor
+        and analyzed research-cruise and time-series oceanographic data. CITI Responsible
+        Conduct of Research (RCR) certified.
       </p>
     </section>
 
@@ -195,6 +235,19 @@
   <script type="module">
     import { initReveal } from "./reveal.js";
     initReveal();
+  </script>
+  <script type="module">
+    import { initDroughtExplorer } from "./drought-explorer.js";
+    initDroughtExplorer(document.getElementById("drought-explorer"));
+  </script>
+  <script type="module">
+    import { initCareerTimeline } from "./career-timeline.js";
+    initCareerTimeline({
+      canvas: document.getElementById("career-timeline-canvas"),
+      labelsContainer: document.getElementById("career-timeline-labels"),
+      detailEl: document.getElementById("career-timeline-detail"),
+      a11yContainer: document.getElementById("career-timeline-a11y"),
+    });
   </script>
 
 </body>

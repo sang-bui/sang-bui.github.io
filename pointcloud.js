@@ -198,10 +198,22 @@ export function initPointCloud(canvas) {
 
     window.addEventListener("pointermove", onPointerMove);
 
+    // career-timeline.js dispatches this while a visitor drags to orbit
+    // its own scene, so the two feel like one connected system rather
+    // than two unrelated widgets. Only attached here, past the
+    // reduced-motion early return above, so no motion leaks in from
+    // interacting elsewhere when that preference is set.
+    let syncNudge = 0;
+    const SYNC_SCALE = 0.0006;
+    window.addEventListener("slam-orbit-sync", (event) => {
+      syncNudge += event.detail.deltaX * SYNC_SCALE;
+    });
+
     function animate() {
       requestAnimationFrame(animate);
 
-      group.rotation.y += 0.0003;
+      group.rotation.y += 0.0003 + syncNudge;
+      syncNudge = 0;
 
       const targetX = pointer.x * maxParallax;
       const targetY = -pointer.y * maxParallax;

@@ -65,7 +65,9 @@ a:focus-visible {
 
 .page-shell {
   display: grid;
-  grid-template-columns: minmax(16rem, 26rem) 1fr;
+  /* Widened from the original name/nav/contact sizing (16-26rem) to give
+     the career timeline, now the panel's primary visual, real room. */
+  grid-template-columns: minmax(22rem, 36rem) 1fr;
   min-height: 100svh;
 }
 
@@ -78,27 +80,15 @@ a:focus-visible {
   background: radial-gradient(ellipse at 50% 30%, var(--bg-raised), var(--bg) 70%);
 }
 
-#pointcloud {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  /* Keeps the visual as a quiet backdrop detail rather than the loudest
-     thing on the screen, and fades it into the panel at the edges. */
-  opacity: 0.5;
-  mask-image: radial-gradient(ellipse at 50% 40%, black 45%, transparent 85%);
-  -webkit-mask-image: radial-gradient(ellipse at 50% 40%, black 45%, transparent 85%);
-}
-
 .side-panel-inner {
   position: relative;
   z-index: 1;
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 2.5rem 2rem;
+  gap: 1.5rem;
+  padding: 2rem 1.75rem;
+  overflow-y: auto;
 }
 
 .side-name {
@@ -148,6 +138,8 @@ a:focus-visible {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 1rem;
   font-family: var(--font-mono);
   font-size: 0.8125rem;
   color: var(--ink-dim);
@@ -170,14 +162,14 @@ a:focus-visible {
   padding-top: 3rem;
 }
 
-/* ---------- Career timeline (SLAM-trajectory style) ---------- */
+/* ---------- Career timeline (SLAM-trajectory style, in the sidebar) ---------- */
 
-.career-timeline {
-  padding: 1.5rem clamp(1.5rem, 6vw, 4rem) 2.5rem;
+.side-timeline {
+  display: flex;
+  flex-direction: column;
 }
 
 .career-timeline-label {
-  max-width: 56rem;
   margin: 0 0 0.75rem;
   font-family: var(--font-mono);
   font-size: 0.8125rem;
@@ -187,8 +179,10 @@ a:focus-visible {
 .timeline-canvas-wrap {
   position: relative;
   width: 100%;
-  max-width: 56rem;
-  height: 16rem;
+  /* Responsive to viewport height, not just width, since this now shares
+     a fixed-height sidebar with the name, nav, and contact links rather
+     than sitting in the open-ended scrolling content column. */
+  height: clamp(11rem, 26vh, 17rem);
 }
 
 #career-timeline-canvas {
@@ -217,11 +211,10 @@ a:focus-visible {
 }
 
 .timeline-detail {
-  max-width: 56rem;
   margin: 0.75rem 0 0;
   min-height: 1.4em;
   font-family: var(--font-mono);
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   color: var(--ink);
 }
 
@@ -239,12 +232,6 @@ a:focus-visible {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
-}
-
-@media (max-width: 640px) {
-  .career-timeline {
-    padding: 1.25rem 1.25rem 2rem;
-  }
 }
 
 .work,
@@ -572,14 +559,14 @@ footer {
     border-bottom: 1px solid var(--rule);
   }
 
-  #pointcloud {
-    opacity: 0.3;
-  }
-
   .side-panel-inner {
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.75rem;
     padding: 2.5rem 1.5rem;
+  }
+
+  .timeline-canvas-wrap {
+    height: 12rem;
   }
 
   .side-nav {

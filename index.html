@@ -21,12 +21,22 @@
 
   <div class="page-shell">
     <header class="side-panel">
-      <canvas id="pointcloud" aria-hidden="true"></canvas>
       <div class="side-panel-inner">
         <div class="side-panel-top">
           <h1 class="side-name">Sang Bui</h1>
           <p class="side-role">autonomy &amp; robotics &middot; data science &middot; ai engineering</p>
         </div>
+
+        <div class="side-timeline">
+          <p class="career-timeline-label">career trajectory</p>
+          <div class="timeline-canvas-wrap">
+            <canvas id="career-timeline-canvas" aria-hidden="true"></canvas>
+            <div id="career-timeline-labels" class="timeline-labels"></div>
+          </div>
+          <p id="career-timeline-detail" class="timeline-detail">Hover, drag, or click a point on the path for details.</p>
+          <nav id="career-timeline-a11y" class="timeline-a11y-nav" aria-label="Career milestones"></nav>
+        </div>
+
         <nav class="side-nav" aria-label="Section">
           <a href="#autonomy">autonomy &amp; robotics</a>
           <a href="#data-science">data science</a>
@@ -41,16 +51,6 @@
     </header>
 
     <main class="content-column">
-
-    <section class="career-timeline reveal">
-      <p class="career-timeline-label">career trajectory</p>
-      <div class="timeline-canvas-wrap">
-        <canvas id="career-timeline-canvas" aria-hidden="true"></canvas>
-        <div id="career-timeline-labels" class="timeline-labels"></div>
-      </div>
-      <p id="career-timeline-detail" class="timeline-detail">Hover or click a point on the path for details.</p>
-      <nav id="career-timeline-a11y" class="timeline-a11y-nav" aria-label="Career milestones"></nav>
-    </section>
 
     <section class="work reveal" id="autonomy">
       <div class="work-content">
@@ -226,11 +226,6 @@
 
   <script type="importmap">
     { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js" } }
-  </script>
-  <script type="module">
-    import { initPointCloud } from "./pointcloud.js";
-    const canvas = document.getElementById("pointcloud");
-    if (canvas) initPointCloud(canvas);
   </script>
   <script type="module">
     import { initReveal } from "./reveal.js";

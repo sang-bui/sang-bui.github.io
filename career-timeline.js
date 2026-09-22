@@ -20,11 +20,11 @@ const MILESTONES = [
 const GRADIENT_START = new THREE.Color(0x5b93c9); // --accent, steel blue
 const GRADIENT_END = new THREE.Color(0x52c2b8); // --accent-2, ice cyan
 
-// Matches pointcloud.js's COLOR_POINTS/size/opacity exactly, so the
-// ambient scan points here read as the same material as the hero's.
-const HERO_POINT_COLOR = 0xe3ebf1;
-const HERO_POINT_SIZE = 0.026;
-const HERO_POINT_OPACITY = 0.6;
+// Ambient scan-point treatment, cool ice white, matching the site's ink
+// color rather than the accent, so it reads as background texture.
+const SCAN_POINT_COLOR = 0xe3ebf1;
+const SCAN_POINT_SIZE = 0.026;
+const SCAN_POINT_OPACITY = 0.6;
 
 const X_RANGE = 4.2;
 const Y_AMPLITUDE = 0.9;
@@ -104,10 +104,7 @@ function createMarkers(points) {
 }
 
 // A modest ambient scatter along the curve, suggesting scanned structure
-// around the timeline without competing with it (well short of the hero
-// point cloud's density; this is a supporting layer). Uses the hero's
-// exact color/size/opacity (pointcloud.js's COLOR_POINTS/size/opacity) so
-// this reads as literally the same scan material across both scenes; the
+// around the timeline without competing with it, a supporting layer; the
 // gradient stays reserved for the markers/edges, where it carries real
 // signal (time progression) the ambient points don't need to repeat.
 function createAmbientPoints(curve) {
@@ -125,11 +122,11 @@ function createAmbientPoints(curve) {
   const geometry = new THREE.BufferGeometry();
   geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
   const material = new THREE.PointsMaterial({
-    color: HERO_POINT_COLOR,
-    size: HERO_POINT_SIZE,
+    color: SCAN_POINT_COLOR,
+    size: SCAN_POINT_SIZE,
     sizeAttenuation: true,
     transparent: true,
-    opacity: HERO_POINT_OPACITY,
+    opacity: SCAN_POINT_OPACITY,
   });
   return new THREE.Points(geometry, material);
 }
@@ -279,31 +276,18 @@ export function initCareerTimeline({ canvas, labelsContainer, detailEl, a11yCont
     // drag" by movement distance, rather than trusting the native click
     // event, which fires after drags too.
     let downPos = null;
-    let lastDragPos = null;
 
     canvas.style.cursor = "grab";
     canvas.addEventListener("pointermove", (event) => {
       pointerToNDC(event);
       setHovered(pickMarker());
-
-      // While actively dragging to orbit, echo a small nudge to the hero
-      // point cloud so the two scenes feel connected, one system, not two
-      // unrelated widgets. Only the incremental delta since the last move
-      // is sent, not the whole drag distance.
-      if (lastDragPos) {
-        const deltaX = event.clientX - lastDragPos.x;
-        lastDragPos = { x: event.clientX, y: event.clientY };
-        window.dispatchEvent(new CustomEvent("slam-orbit-sync", { detail: { deltaX } }));
-      }
     });
     canvas.addEventListener("pointerleave", () => setHovered(null));
 
     canvas.addEventListener("pointerdown", (event) => {
       downPos = { x: event.clientX, y: event.clientY };
-      lastDragPos = { x: event.clientX, y: event.clientY };
     });
     canvas.addEventListener("pointerup", (event) => {
-      lastDragPos = null;
       if (!downPos) return;
       const dx = event.clientX - downPos.x;
       const dy = event.clientY - downPos.y;
@@ -338,35 +322,17 @@ export function initCareerTimeline({ canvas, labelsContainer, detailEl, a11yCont
       renderer.render(scene, camera);
     }
 
-    renderOnce();
-
-    // Only run a continuous loop while the section is actually visible, a
-    // second live WebGL scene is real GPU cost; but keep it running
-    // whenever visible since OrbitControls needs continuous frames to
+    // The sidebar is always visible (position: sticky, fills the
+    // viewport), so unlike its old placement scrolling through the page,
+    // there's no "off-screen" state worth pausing for; the loop just runs
+    // continuously, same as this scene's OrbitControls needs anyway to
     // respond to drag/zoom input smoothly.
-    let rafId = null;
     function animate() {
-      rafId = requestAnimationFrame(animate);
+      requestAnimationFrame(animate);
       renderOnce();
     }
 
-    if (typeof IntersectionObserver !== "undefined") {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          const visible = entries[0].isIntersecting;
-          if (visible && rafId === null) {
-            animate();
-          } else if (!visible && rafId !== null) {
-            cancelAnimationFrame(rafId);
-            rafId = null;
-          }
-        },
-        { threshold: 0.1 }
-      );
-      observer.observe(container);
-    } else {
-      animate();
-    }
+    animate();
   } catch (err) {
     console.warn("career-timeline.js: failed to initialize.", err);
   }

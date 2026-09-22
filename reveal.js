@@ -1,15 +1,10 @@
 // Scroll-reveal expects elements to start with the "reveal" class (hidden
 // state) and adds "is-visible" (revealed state) the first time each one
 // enters the viewport; both classes' actual CSS live in style.css, not here.
-
-const NAV_LINKS = [
-  { href: "#autonomy", label: "autonomy" },
-  { href: "#data-science", label: "data science" },
-  { href: "#ai-engineering", label: "ai engineering" },
-  { href: "#about", label: "about" },
-  { href: "mailto:sang_bui@mines.edu", label: "email" },
-  { href: "https://linkedin.com/in/buisang", label: "linkedin" },
-];
+//
+// The sidebar nav is real, static markup (not injected here); this module
+// only toggles which of its links carries "is-active" as sections scroll
+// through view.
 
 function prefersReducedMotion() {
   return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -19,7 +14,6 @@ function setupReveal(reducedMotion) {
   const sections = document.querySelectorAll("main > section");
 
   if (reducedMotion || typeof IntersectionObserver === "undefined") {
-    // No motion to opt into (or no observer support): just show everything.
     sections.forEach((section) => section.classList.add("is-visible"));
     return;
   }
@@ -39,61 +33,41 @@ function setupReveal(reducedMotion) {
   sections.forEach((section) => observer.observe(section));
 }
 
-function buildNav() {
-  const nav = document.createElement("nav");
-  nav.className = "site-nav";
-  nav.setAttribute("aria-label", "Section");
+function setupActiveNav() {
+  const sections = document.querySelectorAll("main > section[id]");
+  const navLinks = document.querySelectorAll('.side-nav a[href^="#"]');
 
-  NAV_LINKS.forEach(({ href, label }) => {
-    const link = document.createElement("a");
-    link.href = href;
-    link.textContent = label;
-    if (href.startsWith("http")) {
-      link.target = "_blank";
-      link.rel = "noopener";
-    }
-    nav.appendChild(link);
-  });
-
-  document.body.appendChild(nav);
-  return nav;
-}
-
-function setupStickyNav(reducedMotion) {
-  const hero = document.querySelector(".hero");
-  if (!hero) {
-    console.warn("reveal.js: no .hero element found, skipping sticky nav.");
+  if (!sections.length || !navLinks.length || typeof IntersectionObserver === "undefined") {
     return;
   }
 
-  const nav = buildNav();
+  const linkByHash = new Map();
+  navLinks.forEach((link) => linkByHash.set(link.getAttribute("href"), link));
 
-  if (reducedMotion) {
-    // Simpler path: just show the nav, no fade/scroll-driven transition.
-    nav.classList.add("is-visible");
-    return;
-  }
+  // A tall band around the vertical center of the viewport: whichever
+  // section is crossing it counts as "current," which reads better than
+  // triggering the moment a section's top edge merely appears.
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const link = linkByHash.get(`#${entry.target.id}`);
+        if (!link) return;
+        navLinks.forEach((l) => l.classList.remove("is-active"));
+        link.classList.add("is-active");
+      });
+    },
+    { rootMargin: "-40% 0px -55% 0px" }
+  );
 
-  const threshold = hero.offsetHeight || window.innerHeight * 0.6;
-  let visible = false;
-
-  function onScroll() {
-    const shouldShow = window.scrollY > threshold;
-    if (shouldShow !== visible) {
-      visible = shouldShow;
-      nav.classList.toggle("is-visible", visible);
-    }
-  }
-
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
+  sections.forEach((section) => observer.observe(section));
 }
 
 export function initReveal() {
   try {
     const reducedMotion = prefersReducedMotion();
     setupReveal(reducedMotion);
-    setupStickyNav(reducedMotion);
+    setupActiveNav();
   } catch (err) {
     console.warn("reveal.js: failed to initialize scroll reveal/nav.", err);
   }

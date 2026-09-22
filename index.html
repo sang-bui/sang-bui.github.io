@@ -19,173 +19,180 @@
 </head>
 <body>
 
-  <header class="hero">
-    <canvas id="pointcloud" aria-hidden="true"></canvas>
-    <div class="hero-content">
-      <h1 class="hero-name">Sang Bui</h1>
-      <ul class="hero-fragments">
-        <li><a href="#autonomy">autonomy</a></li>
-        <li><a href="#data-science">data science</a></li>
-        <li><a href="#ai-engineering">ai engineering</a></li>
-      </ul>
-    </div>
-    <nav class="hero-links" aria-label="Contact">
-      <a href="mailto:sang_bui@mines.edu">sang_bui@mines.edu</a>
-      <a href="https://linkedin.com/in/buisang" target="_blank" rel="noopener">linkedin.com/in/buisang</a>
-    </nav>
-  </header>
+  <div class="page-shell">
+    <header class="side-panel">
+      <canvas id="pointcloud" aria-hidden="true"></canvas>
+      <div class="side-panel-inner">
+        <div class="side-panel-top">
+          <h1 class="side-name">Sang Bui</h1>
+          <p class="side-role">autonomy &amp; robotics &middot; data science &middot; ai engineering</p>
+        </div>
+        <nav class="side-nav" aria-label="Section">
+          <a href="#autonomy">autonomy &amp; robotics</a>
+          <a href="#data-science">data science</a>
+          <a href="#ai-engineering">ai engineering</a>
+          <a href="#about">about</a>
+        </nav>
+        <nav class="side-contact" aria-label="Contact">
+          <a href="mailto:sang_bui@mines.edu">sang_bui@mines.edu</a>
+          <a href="https://linkedin.com/in/buisang" target="_blank" rel="noopener">linkedin.com/in/buisang</a>
+        </nav>
+      </div>
+    </header>
 
-  <main>
+    <main class="content-column">
 
     <section class="work reveal" id="autonomy">
-      <div class="section-head">
-        <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-          <circle cx="12" cy="12" r="2.4"/>
-          <ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(-24 12 12)"/>
-          <circle cx="21" cy="8.4" r="1.1" fill="currentColor" stroke="none"/>
-        </svg>
-        <p class="section-tag">01 &mdash; autonomy &amp; robotics</p>
+      <div class="work-content">
+        <div class="section-head">
+          <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <circle cx="12" cy="12" r="2.4"/>
+            <ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(-24 12 12)"/>
+            <circle cx="21" cy="8.4" r="1.1" fill="currentColor" stroke="none"/>
+          </svg>
+          <p class="section-tag">01 &mdash; autonomy &amp; robotics</p>
+        </div>
+        <h2>Autonomy &amp; Robotics</h2>
+
+        <article>
+          <h3>SLAM &amp; Autonomy Research Assistant</h3>
+          <p class="meta">Autonomy, Robotics &amp; Intelligent Algorithms Lab, Colorado School of Mines &middot; Nov 2023 &ndash; May 2026</p>
+          <ul>
+            <li>Researched, containerized, and integrated Structure PLP-SLAM into the lab's automated benchmarking workflow for evaluation across baseline and degraded visual conditions.</li>
+            <li>Built Python and Bash tooling for multi-system SLAM execution, dataset/trajectory prep, experiment configuration, runtime analysis, and comparative visualization.</li>
+            <li>Created synthetic-noise datasets and OpenCV-based denoising pipelines to evaluate visual SLAM robustness under controlled degradation.</li>
+            <li>Diagnosed build, dependency, GPU, container, and configuration failures across Structure PLP-SLAM, DPVO, MASt3R-SLAM, and DSO.</li>
+          </ul>
+        </article>
+
+        <article>
+          <h3>SLAM Research Contractor</h3>
+          <p class="meta">Spexal SARL, Remote &middot; Feb &ndash; Jul 2025</p>
+          <ul>
+            <li>Evaluated five state-of-the-art LiDAR SLAM systems for a major automotive client considering industrial autonomous mobile robot deployment.</li>
+            <li>Contributed to a 35-page technical analysis report translating SLAM research into engineering recommendations.</li>
+          </ul>
+        </article>
+
+        <article>
+          <h3>Incoming Satellite Systems Engineer Associate</h3>
+          <p class="meta">Lockheed Martin Space, Aurora, CO &middot; Expected Jun 2027</p>
+        </article>
       </div>
-      <h2>Autonomy &amp; Robotics</h2>
-
-      <article>
-        <h3>SLAM &amp; Autonomy Research Assistant</h3>
-        <p class="meta">Autonomy, Robotics &amp; Intelligent Algorithms Lab, Colorado School of Mines &middot; Nov 2023 &ndash; May 2026</p>
-        <ul>
-          <li>Researched, containerized, and integrated Structure PLP-SLAM into the lab's automated benchmarking workflow for evaluation across baseline and degraded visual conditions.</li>
-          <li>Built Python and Bash tooling for multi-system SLAM execution, dataset/trajectory prep, experiment configuration, runtime analysis, and comparative visualization.</li>
-          <li>Created synthetic-noise datasets and OpenCV-based denoising pipelines to evaluate visual SLAM robustness under controlled degradation.</li>
-          <li>Diagnosed build, dependency, GPU, container, and configuration failures across Structure PLP-SLAM, DPVO, MASt3R-SLAM, and DSO.</li>
-        </ul>
-      </article>
-
-      <article>
-        <h3>SLAM Research Contractor</h3>
-        <p class="meta">Spexal SARL, Remote &middot; Feb &ndash; Jul 2025</p>
-        <ul>
-          <li>Evaluated five state-of-the-art LiDAR SLAM systems for a major automotive client considering industrial autonomous mobile robot deployment.</li>
-          <li>Contributed to a 35-page technical analysis report translating SLAM research into engineering recommendations.</li>
-        </ul>
-      </article>
-
-      <article>
-        <h3>Incoming Satellite Systems Engineer Associate</h3>
-        <p class="meta">Lockheed Martin Space, Aurora, CO &middot; Expected Jun 2027</p>
-      </article>
     </section>
 
     <section class="work reveal" id="data-science">
-      <div class="section-head">
-        <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-          <polyline points="2.5 17 8 10.5 12 14 21.5 4.5"/>
-          <polyline points="15.5 4.5 21.5 4.5 21.5 10.5"/>
-        </svg>
-        <p class="section-tag">02 &mdash; applied data science</p>
+      <div class="work-content">
+        <div class="section-head">
+          <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <polyline points="2.5 17 8 10.5 12 14 21.5 4.5"/>
+            <polyline points="15.5 4.5 21.5 4.5 21.5 10.5"/>
+          </svg>
+          <p class="section-tag">02 &mdash; applied data science</p>
+        </div>
+        <h2>Applied Data Science</h2>
+
+        <article>
+          <h3>Climate Data Guide Data Science Intern</h3>
+          <p class="meta">NSF NCAR Climate &amp; Global Dynamics Laboratory, Boulder, CO &middot; Jun 2025 &ndash; May 2026</p>
+          <ul>
+            <li>Reimplemented the Palmer Drought Severity Index (PDSI) after reviewing the underlying climate literature and existing scientific implementations.</li>
+            <li>Developed a parallel Python/Dask pipeline on NSF NCAR's Casper HPC cluster to generate a global drought dataset spanning 1901&ndash;2024.</li>
+            <li>Extended the research through SPI-48 and SPEI-48 analysis across the U.S. Great Plains, identifying a post-1980 heat-driven drought penalty.</li>
+            <li>Presented findings on PDSI limitations to 10+ senior scientists and an audience of 30+ at the NSF NCAR Summer Symposium.</li>
+          </ul>
+        </article>
+
+        <article>
+          <h3>Computer Resource Utilization Research Assistant</h3>
+          <p class="meta">CS@Mines, Colorado School of Mines &middot; Sep 2023 &ndash; May 2025</p>
+          <ul>
+            <li>Conducted cybersecurity and privacy research examining server resource utilization and related risks in cloud-gaming systems.</li>
+            <li>Co-created and presented research at the 2025 Spring Undergraduate Research Symposium; preserved with DOI <a href="https://doi.org/10.25676/11124/180538" target="_blank" rel="noopener">10.25676/11124/180538</a>.</li>
+          </ul>
+        </article>
+
+        <article>
+          <h3>Selected research outputs</h3>
+          <ul>
+            <li>S. Bui and N. Lenssen, &ldquo;The Temperature Penalty: Using SPI and SPEI to Quantify the Impact of Climate Change on 21st-Century Droughts,&rdquo; research poster, Colorado School of Mines and NSF NCAR.</li>
+            <li>S. Bui, N. Lenssen, et al., &ldquo;Palmer Drought Severity Index (PDSI),&rdquo; NSF NCAR Climate Data Guide, Oct 2025.</li>
+          </ul>
+        </article>
       </div>
-      <h2>Applied Data Science</h2>
-
-      <article>
-        <h3>Climate Data Guide Data Science Intern</h3>
-        <p class="meta">NSF NCAR Climate &amp; Global Dynamics Laboratory, Boulder, CO &middot; Jun 2025 &ndash; May 2026</p>
-        <ul>
-          <li>Reimplemented the Palmer Drought Severity Index (PDSI) after reviewing the underlying climate literature and existing scientific implementations.</li>
-          <li>Developed a parallel Python/Dask pipeline on NSF NCAR's Casper HPC cluster to generate a global drought dataset spanning 1901&ndash;2024.</li>
-          <li>Extended the research through SPI-48 and SPEI-48 analysis across the U.S. Great Plains, identifying a post-1980 heat-driven drought penalty.</li>
-          <li>Presented findings on PDSI limitations to 10+ senior scientists and an audience of 30+ at the NSF NCAR Summer Symposium.</li>
-        </ul>
-      </article>
-
-      <article>
-        <h3>Computer Resource Utilization Research Assistant</h3>
-        <p class="meta">CS@Mines, Colorado School of Mines &middot; Sep 2023 &ndash; May 2025</p>
-        <ul>
-          <li>Conducted cybersecurity and privacy research examining server resource utilization and related risks in cloud-gaming systems.</li>
-          <li>Co-created and presented research at the 2025 Spring Undergraduate Research Symposium; preserved with DOI <a href="https://doi.org/10.25676/11124/180538" target="_blank" rel="noopener">10.25676/11124/180538</a>.</li>
-        </ul>
-      </article>
-
-      <article>
-        <h3>Selected research outputs</h3>
-        <ul>
-          <li>S. Bui and N. Lenssen, &ldquo;The Temperature Penalty: Using SPI and SPEI to Quantify the Impact of Climate Change on 21st-Century Droughts,&rdquo; research poster, Colorado School of Mines and NSF NCAR.</li>
-          <li>S. Bui, N. Lenssen, et al., &ldquo;Palmer Drought Severity Index (PDSI),&rdquo; NSF NCAR Climate Data Guide, Oct 2025.</li>
-        </ul>
-      </article>
     </section>
 
     <section class="work reveal" id="ai-engineering">
-      <div class="section-head">
-        <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-          <circle cx="5" cy="12" r="2.2"/>
-          <circle cx="19" cy="5.5" r="2.2"/>
-          <circle cx="19" cy="18.5" r="2.2"/>
-          <line x1="7" y1="11" x2="17" y2="6.5"/>
-          <line x1="7" y1="13" x2="17" y2="17.5"/>
-        </svg>
-        <p class="section-tag">03 &mdash; full-stack + ai engineering</p>
-      </div>
-      <h2>Full-Stack + AI Engineering</h2>
-
-      <article>
-        <h3>Technical Consultant, GenAI Analytics Systems</h3>
-        <p class="meta">Qualcomm Field Session, Boulder, CO &middot; May &ndash; Jun 2026</p>
-        <ul>
-          <li>Designed a generative-AI analytics application translating natural-language questions into SQL queries and data visualizations across enterprise databases supporting 2,000+ internal cellular test systems.</li>
-          <li>Built a full-stack application with a React/TypeScript frontend and FastAPI/Python backend, integrating LangChain and LangGraph for multi-step query and visualization workflows.</li>
-          <li>Implemented retrieval-augmented generation with a local vector store, containerized with Docker for reproducible deployment.</li>
-        </ul>
-
-        <div class="case-study">
-          <h4>system architecture</h4>
-          <div class="case-study-body">
-            <div class="case-study-diagram">
-              <svg class="pipeline-diagram" viewBox="0 0 480 160" fill="none" stroke="currentColor" stroke-width="1.5" role="img" aria-label="Pipeline diagram: a natural-language query flows into a LangGraph orchestration node, which branches into a RAG vector-store lookup and SQL generation, merging into a visualization output.">
-                <line x1="88" y1="88" x2="136" y2="88"/>
-                <line x1="206" y1="76" x2="270" y2="33"/>
-                <line x1="207" y1="97" x2="270" y2="129"/>
-                <line x1="382" y1="33" x2="406" y2="88"/>
-                <line x1="382" y1="129" x2="406" y2="88"/>
-
-                <rect x="8" y="66" width="80" height="44" rx="6"/>
-                <circle cx="172" cy="88" r="36"/>
-                <circle cx="172" cy="88" r="2" fill="currentColor" stroke="none"/>
-                <circle cx="206" cy="76" r="2" fill="currentColor" stroke="none"/>
-                <circle cx="207" cy="97" r="2" fill="currentColor" stroke="none"/>
-                <rect x="270" y="12" width="112" height="42" rx="6"/>
-                <rect x="270" y="108" width="112" height="42" rx="6"/>
-                <rect x="406" y="68" width="66" height="40" rx="6"/>
-
-                <text x="48" y="92" text-anchor="middle">query</text>
-                <text x="48" y="124" text-anchor="middle" class="pipeline-caption">(natural language)</text>
-                <text x="172" y="85" text-anchor="middle">LangGraph</text>
-                <text x="172" y="98" text-anchor="middle" class="pipeline-caption">orchestration</text>
-                <text x="326" y="29" text-anchor="middle">RAG</text>
-                <text x="326" y="41" text-anchor="middle" class="pipeline-caption">vector store</text>
-                <text x="326" y="133" text-anchor="middle">SQL generation</text>
-                <text x="439" y="91" text-anchor="middle" class="pipeline-caption">visualization</text>
-              </svg>
-            </div>
-            <p class="metric-callout">
-              <span class="metric-number">2,000+</span>
-              <span class="metric-caption">internal cellular test systems supported</span>
-            </p>
-          </div>
+      <div class="work-content">
+        <div class="section-head">
+          <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <circle cx="5" cy="12" r="2.2"/>
+            <circle cx="19" cy="5.5" r="2.2"/>
+            <circle cx="19" cy="18.5" r="2.2"/>
+            <line x1="7" y1="11" x2="17" y2="6.5"/>
+            <line x1="7" y1="13" x2="17" y2="17.5"/>
+          </svg>
+          <p class="section-tag">03 &mdash; full-stack + ai engineering</p>
         </div>
-      </article>
+        <h2>Full-Stack + AI Engineering</h2>
 
-      <article>
-        <h3>Foundational Programming Concepts Teaching Assistant</h3>
-        <p class="meta">CS@Mines, Colorado School of Mines &middot; Aug 2024 &ndash; Dec 2025, May 2026 &ndash; present</p>
-        <ul>
-          <li>Supported 75+ students through tutoring, grading, debugging assistance, and written assignment feedback; selected as Lead Teaching Assistant for a summer course offering.</li>
-        </ul>
-      </article>
+        <article>
+          <h3>Technical Consultant, GenAI Analytics Systems</h3>
+          <p class="meta">Qualcomm Field Session, Boulder, CO &middot; May &ndash; Jun 2026</p>
+          <ul>
+            <li>Designed a generative-AI analytics application translating natural-language questions into SQL queries and data visualizations across enterprise databases supporting 2,000+ internal cellular test systems.</li>
+            <li>Built a full-stack application with a React/TypeScript frontend and FastAPI/Python backend, integrating LangChain and LangGraph for multi-step query and visualization workflows.</li>
+            <li>Implemented retrieval-augmented generation with a local vector store, containerized with Docker for reproducible deployment.</li>
+          </ul>
 
-      <p class="tags">
-        <span>Python</span><span>C++</span><span>SQL</span><span>TypeScript</span>
-        <span>React</span><span>FastAPI</span><span>LangChain</span><span>LangGraph</span>
-        <span>Docker</span><span>NumPy</span><span>pandas</span><span>scikit-learn</span>
-      </p>
+          <div class="case-study">
+            <h4>system architecture</h4>
+            <div class="case-study-body">
+              <div class="case-study-diagram">
+                <svg class="pipeline-diagram" viewBox="0 0 480 160" fill="none" stroke="currentColor" stroke-width="1.5" role="img" aria-label="Pipeline diagram: a natural-language query flows into a LangGraph orchestration node, which branches into a RAG vector-store lookup and SQL generation, merging into a visualization output.">
+                  <line x1="88" y1="88" x2="136" y2="88"/>
+                  <line x1="206" y1="76" x2="270" y2="33"/>
+                  <line x1="207" y1="97" x2="270" y2="129"/>
+                  <line x1="382" y1="33" x2="406" y2="88"/>
+                  <line x1="382" y1="129" x2="406" y2="88"/>
+
+                  <rect x="8" y="66" width="80" height="44" rx="6"/>
+                  <circle cx="172" cy="88" r="36"/>
+                  <circle cx="172" cy="88" r="2" fill="currentColor" stroke="none"/>
+                  <circle cx="206" cy="76" r="2" fill="currentColor" stroke="none"/>
+                  <circle cx="207" cy="97" r="2" fill="currentColor" stroke="none"/>
+                  <rect x="270" y="12" width="112" height="42" rx="6"/>
+                  <rect x="270" y="108" width="112" height="42" rx="6"/>
+                  <rect x="406" y="68" width="66" height="40" rx="6"/>
+
+                  <text x="48" y="92" text-anchor="middle">query</text>
+                  <text x="48" y="124" text-anchor="middle" class="pipeline-caption">(natural language)</text>
+                  <text x="172" y="85" text-anchor="middle">LangGraph</text>
+                  <text x="172" y="98" text-anchor="middle" class="pipeline-caption">orchestration</text>
+                  <text x="326" y="29" text-anchor="middle">RAG</text>
+                  <text x="326" y="41" text-anchor="middle" class="pipeline-caption">vector store</text>
+                  <text x="326" y="133" text-anchor="middle">SQL generation</text>
+                  <text x="439" y="91" text-anchor="middle" class="pipeline-caption">visualization</text>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article>
+          <h3>Foundational Programming Concepts Teaching Assistant</h3>
+          <p class="meta">CS@Mines, Colorado School of Mines &middot; Aug 2024 &ndash; Dec 2025, May 2026 &ndash; present</p>
+          <ul>
+            <li>Supported 75+ students through tutoring, grading, debugging assistance, and written assignment feedback; selected as Lead Teaching Assistant for a summer course offering.</li>
+          </ul>
+        </article>
+
+        <p class="tags">
+          <span>Python</span><span>C++</span><span>SQL</span><span>TypeScript</span>
+          <span>React</span><span>FastAPI</span><span>LangChain</span><span>LangGraph</span>
+          <span>Docker</span><span>NumPy</span><span>pandas</span><span>scikit-learn</span>
+        </p>
+      </div>
     </section>
 
     <section class="about reveal" id="about">
@@ -200,15 +207,15 @@
       </p>
     </section>
 
-  </main>
-
-  <footer>
-    <p>
-      <a href="mailto:sang_bui@mines.edu">sang_bui@mines.edu</a>
-      &middot;
-      <a href="https://linkedin.com/in/buisang" target="_blank" rel="noopener">linkedin.com/in/buisang</a>
-    </p>
-  </footer>
+      <footer>
+        <p>
+          <a href="mailto:sang_bui@mines.edu">sang_bui@mines.edu</a>
+          &middot;
+          <a href="https://linkedin.com/in/buisang" target="_blank" rel="noopener">linkedin.com/in/buisang</a>
+        </p>
+      </footer>
+    </main>
+  </div>
 
   <script type="importmap">
     { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js" } }

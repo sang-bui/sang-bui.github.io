@@ -42,46 +42,6 @@ a:focus-visible {
   color: var(--ink);
 }
 
-/* ---------- Sticky nav (injected by reveal.js) ---------- */
-
-.site-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  padding: 0.9rem 1.5rem;
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--rule);
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-
-  opacity: 0;
-  transform: translateY(-100%);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  pointer-events: none;
-}
-
-.site-nav.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-.site-nav a {
-  color: var(--ink-dim);
-}
-
-.site-nav a:hover,
-.site-nav a:focus-visible {
-  color: var(--accent);
-}
-
 /* ---------- Scroll reveal ---------- */
 
 .reveal {
@@ -96,22 +56,25 @@ a:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal,
-  .site-nav {
+  .reveal {
     transition: none;
   }
 }
 
-/* ---------- Hero ---------- */
+/* ---------- Page shell: fixed left panel, scrolling right column ---------- */
 
-.hero {
-  position: relative;
-  min-height: 74svh;
-  display: flex;
-  align-items: center;
+.page-shell {
+  display: grid;
+  grid-template-columns: minmax(16rem, 26rem) 1fr;
+  min-height: 100svh;
+}
+
+.side-panel {
+  position: sticky;
+  top: 0;
+  height: 100svh;
   overflow: hidden;
-  /* Fallback in case the point-cloud script fails or WebGL is unavailable:
-     the canvas is transparent, so this shows through underneath it. */
+  border-right: 1px solid var(--rule);
   background: radial-gradient(ellipse at 50% 30%, var(--bg-raised), var(--bg) 70%);
 }
 
@@ -122,108 +85,105 @@ a:focus-visible {
   height: 100%;
   display: block;
   /* Keeps the visual as a quiet backdrop detail rather than the loudest
-     thing on the screen, and fades it into the page at the edges. */
-  opacity: 0.55;
+     thing on the screen, and fades it into the panel at the edges. */
+  opacity: 0.5;
   mask-image: radial-gradient(ellipse at 50% 40%, black 45%, transparent 85%);
   -webkit-mask-image: radial-gradient(ellipse at 50% 40%, black 45%, transparent 85%);
 }
 
-.hero-content {
+.side-panel-inner {
   position: relative;
   z-index: 1;
-  max-width: 64rem;
-  /* Off-center on purpose: a wider left margin than right, rather than a
-     symmetric centered block, so the page reads as a placed statement
-     instead of a centered slide. */
-  margin: 0 8vw 0 0;
-  padding: 2rem 1.5rem 2rem clamp(1.5rem, 8vw, 6rem);
-  text-align: left;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2.5rem 2rem;
 }
 
-.section-tag {
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  color: var(--accent);
-  margin: 0 0 1rem;
-}
-
-.hero-name {
+.side-name {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 5.5vw + 1rem, 4.25rem);
-  line-height: 1;
+  font-size: clamp(1.75rem, 2vw + 1rem, 2.5rem);
+  line-height: 1.05;
   font-weight: 800;
   letter-spacing: -0.01em;
-  margin: 0 0 1.5rem;
+  margin: 0 0 0.75rem;
   color: var(--ink);
 }
 
-.hero-fragments {
-  display: flex;
-  gap: 1.75rem;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.side-role {
   font-family: var(--font-mono);
-  font-size: 0.9375rem;
-}
-
-.hero-fragments a {
+  font-size: 0.8125rem;
+  line-height: 1.6;
   color: var(--ink-dim);
+  margin: 0;
 }
 
-.hero-fragments a:hover,
-.hero-fragments a:focus-visible {
-  color: var(--accent);
-}
-
-.hero-links {
-  position: absolute;
-  right: 1.5rem;
-  bottom: 1.5rem;
-  z-index: 1;
+.side-nav {
   display: flex;
-  gap: 1.25rem;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+}
+
+.side-nav a {
+  color: var(--ink-dim);
+  padding-left: 0.9rem;
+  border-left: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.side-nav a.is-active {
+  color: var(--ink);
+  border-left-color: var(--accent);
+}
+
+.side-nav a:hover,
+.side-nav a:focus-visible {
+  color: var(--ink);
+}
+
+.side-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   font-family: var(--font-mono);
   font-size: 0.8125rem;
   color: var(--ink-dim);
 }
 
-.hero-links a {
+.side-contact a {
   color: var(--ink-dim);
 }
 
-.hero-links a:hover,
-.hero-links a:focus-visible {
+.side-contact a:hover,
+.side-contact a:focus-visible {
   color: var(--accent);
 }
 
-/* ---------- Work sections ---------- */
+/* ---------- Content column ---------- */
 
-main {
+.content-column {
   position: relative;
-  z-index: 1;
   background: var(--bg);
+  padding-top: 3rem;
 }
 
 .work,
 .about {
   position: relative;
-  margin: 0;
-  padding: 5rem 1.5rem 5rem clamp(1.5rem, 8vw, 6rem);
+  padding: 5rem 2.5rem;
   border-top: 1px solid var(--rule);
-  /* The section itself runs full width, so the dot grid fills the whole
-     row instead of stopping in a box on the left; the text column is
-     capped separately below so lines stay readable. */
+  /* Full width of the content column, so the dot grid fills the whole
+     row instead of stopping in a narrow box. */
   background-image: radial-gradient(var(--rule) 1px, transparent 1px);
   background-size: 22px 22px;
   background-position: -11px -11px;
 }
 
-.work article,
-.work > .tags,
+.work-content article,
+.work-content > .tags,
 .about > p {
   max-width: 40rem;
 }
@@ -236,6 +196,9 @@ main {
 }
 
 .section-tag {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--accent);
   margin: 0;
 }
 
@@ -376,34 +339,6 @@ article li:last-child {
   fill: var(--ink-dim);
 }
 
-.metric-callout {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.2rem;
-  margin: 0;
-  padding: 0.85rem 1.1rem;
-  flex: 0 0 auto;
-  background: color-mix(in srgb, var(--accent) 10%, transparent);
-  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
-  border-radius: 8px;
-}
-
-.metric-callout .metric-number {
-  font-family: var(--font-mono);
-  font-size: 2rem;
-  font-weight: 600;
-  line-height: 1;
-  color: var(--accent);
-}
-
-.metric-callout .metric-caption {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--ink-dim);
-  max-width: 12rem;
-}
-
 @media (max-width: 640px) {
   .case-study {
     padding: 1.25rem 1.25rem 1.5rem;
@@ -414,18 +349,52 @@ article li:last-child {
 
 footer {
   border-top: 1px solid var(--rule);
-  padding: 2.5rem 1.5rem 2.5rem clamp(1.5rem, 8vw, 6rem);
+  padding: 2.5rem;
   text-align: left;
   font-family: var(--font-mono);
   font-size: 0.875rem;
   color: var(--ink-dim);
 }
 
-/* ---------- Motion & accessibility ---------- */
+/* ---------- Responsive: collapse to one column ---------- */
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+@media (max-width: 900px) {
+  .page-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .side-panel {
+    position: static;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  #pointcloud {
+    opacity: 0.3;
+  }
+
+  .side-panel-inner {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2.5rem 1.5rem;
+  }
+
+  .side-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+  }
+
+  .side-nav a {
+    padding-left: 0;
+    border-left: none;
+    border-bottom: 2px solid transparent;
+  }
+
+  .side-nav a.is-active {
+    border-left: none;
+    border-bottom-color: var(--accent);
   }
 }
 
@@ -433,5 +402,9 @@ footer {
   .work,
   .about {
     padding: 3.5rem 1.25rem;
+  }
+
+  footer {
+    padding: 2rem 1.25rem;
   }
 }

@@ -34,6 +34,7 @@ Purpose is deliberately kept open between job-search and graduate-school framing
 - Content must be traceable to real, confirmed facts (resume, research outputs, course record). No invented testimonials, employers, benchmarks, or claims.
 - Recommended stack is plain HTML/CSS (already in place from the P1 template); nothing to build or install.
 - Source material (resume, private recommendation-letter notes) lives in this working copy only and is gitignored; never quote the recommendation notes' private framing (e.g. specific grad-application strategy) on the public site, only facts that also appear on the resume or are otherwise safe to publish.
+- GPA is not published on the site (student preference); education section names the degree, specialization, school, and dates only.
 
 ## Brand Commitments
 

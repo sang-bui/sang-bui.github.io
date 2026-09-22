@@ -5,8 +5,17 @@
 // Until the workflow has run at least once, the file won't exist yet, that
 // 404 is expected and handled quietly, the card just stays hidden.
 
-export async function initTopArtists({ card, list }) {
-  if (!card || !list) return;
+// Spotify's genre data is sparse (often missing per-artist), so it's left
+// out of the rendered list entirely rather than showing up for some
+// artists and not others.
+function formatUpdatedAt(isoString) {
+  const date = new Date(isoString);
+  if (Number.isNaN(date.getTime())) return null;
+  return date.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+}
+
+export async function initTopArtists({ section, label, list } = {}) {
+  if (!section || !label || !list) return;
 
   try {
     const res = await fetch("spotify-top-artists.json", { cache: "no-store" });
@@ -33,19 +42,20 @@ export async function initTopArtists({ card, list }) {
       name.textContent = artist.name;
       li.appendChild(name);
 
-      if (artist.genre) {
-        const genre = document.createElement("span");
-        genre.className = "top-artists-genre";
-        genre.textContent = artist.genre;
-        li.appendChild(genre);
-      }
-
       list.appendChild(li);
     });
 
-    card.hidden = false;
+    // Spotify's time_range=medium_term (set server-side in the workflow)
+    // means "roughly the last 6 months," made explicit here so this
+    // doesn't read as an all-time or instant-live ranking.
+    const updated = formatUpdatedAt(data.updated_at);
+    label.textContent = updated
+      ? `Top artists, last 6 months · updated ${updated}`
+      : "Top artists, last 6 months";
+
+    section.hidden = false;
   } catch (err) {
-    // Network hiccup, malformed file, whatever, the card just stays
+    // Network hiccup, malformed file, whatever, the section just stays
     // hidden rather than showing broken or stale content.
     console.warn("spotify-top.js: could not load top artists.", err);
   }

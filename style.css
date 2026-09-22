@@ -109,9 +109,14 @@ a:focus-visible {
   gap: 1rem;
 }
 
-.side-panel-top .headshot-slot {
-  width: 4.5rem;
-  height: 4.5rem;
+.headshot {
+  width: 6.5rem;
+  height: 6.5rem;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: 1px solid var(--rule);
+  object-fit: cover;
+  display: block;
 }
 
 .side-name {
@@ -130,6 +135,13 @@ a:focus-visible {
   line-height: 1.6;
   color: var(--ink-dim);
   margin: 0;
+}
+
+.side-location {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  margin: 0.35rem 0 0;
 }
 
 .side-nav {
@@ -159,22 +171,29 @@ a:focus-visible {
 
 .side-contact {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
   margin-top: auto;
   padding-top: 1rem;
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
   color: var(--ink-dim);
 }
 
 .side-contact a {
+  display: block;
   color: var(--ink-dim);
+  line-height: 0;
+  transition: color 0.2s ease;
 }
 
 .side-contact a:hover,
 .side-contact a:focus-visible {
   color: var(--accent);
+}
+
+.side-contact svg {
+  width: 1.375rem;
+  height: 1.375rem;
 }
 
 /* ---------- Content column ---------- */
@@ -288,8 +307,9 @@ a:focus-visible {
 
 .work-content article,
 .work-content > .tags,
-.about > p {
-  max-width: 40rem;
+.about > p,
+.about > article {
+  max-width: 54rem;
 }
 
 .section-head {
@@ -318,16 +338,8 @@ a:focus-visible {
   font-size: clamp(1.75rem, 3vw + 1rem, 2.5rem);
   line-height: 1.2;
   font-weight: 600;
-  margin: 0 0 1rem;
-  max-width: 32rem;
-}
-
-.section-thesis {
-  font-size: 1.0625rem;
-  line-height: 1.6;
-  color: var(--ink-dim);
-  margin: 0 0 3rem;
-  max-width: 34rem;
+  margin: 0 0 2.5rem;
+  max-width: 44rem;
 }
 
 article {
@@ -372,33 +384,10 @@ article li:last-child {
   margin-bottom: 0;
 }
 
-.poster-figure {
-  margin: 1.5rem 0 0;
-  max-width: 40rem;
-}
-
-.poster-figure img {
-  display: block;
-  width: 100%;
-  height: auto;
-  /* Real matplotlib output, white background and all — framed rather
-     than restyled, so it reads as an inset printed figure. */
-  background: #fff;
-  border-radius: 8px;
-  border: 1px solid var(--rule);
-  padding: 0.5rem;
-}
-
-.poster-figure figcaption {
-  margin-top: 0.6rem;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--ink-dim);
-}
-
-/* A compact thumbnail + link, not a full embed, so a dense text-heavy
-   poster doesn't compete with the page; the real resolution only loads
-   when someone actually wants to look closely, in its own tab. */
+/* A compact thumbnail + link, not a full embed, so a bright, light-
+   background image (a poster, a matplotlib chart) doesn't clash with the
+   dark page; the real resolution only loads when someone actually wants
+   to look closely, in its own tab. */
 .poster-link {
   display: inline-flex;
   align-items: center;
@@ -430,6 +419,13 @@ article li:last-child {
   border: 1px solid var(--rule);
 }
 
+.poster-link-caption {
+  margin: 0.6rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-dim);
+}
+
 .tags {
   display: flex;
   flex-wrap: wrap;
@@ -453,9 +449,9 @@ article li:last-child {
 }
 
 /* ---------- Beyond the resume (About section) ----------
-   A small, separate area for personal, non-resume items: a headshot slot
-   (empty until a real photo is added) and cards linking out to real
-   personal profiles, room to add more over time. */
+   A small, separate area for personal, non-resume items: real cards
+   linking out to real personal profiles/data, room to add more over
+   time. The headshot itself lives in the sidebar, not here. */
 
 .personal {
   margin-top: 3rem;
@@ -463,30 +459,17 @@ article li:last-child {
   border-top: 1px solid var(--rule);
 }
 
-.personal-grid {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1.25rem;
-  margin-top: 1rem;
-}
-
-.headshot-slot {
-  width: 6rem;
-  height: 6rem;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px dashed var(--rule);
-  border-radius: 10px;
-  background: var(--bg-raised);
+.personal-intro {
+  margin: 0.5rem 0 0;
   color: var(--ink-dim);
 }
 
-.headshot-slot svg {
-  width: 2rem;
-  height: 2rem;
+.personal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  align-items: stretch;
+  gap: 1.25rem;
+  margin-top: 1rem;
 }
 
 .personal-card {
@@ -507,8 +490,8 @@ article li:last-child {
 }
 
 .personal-card-avatar {
-  width: 3.25rem;
-  height: 3.25rem;
+  width: 4rem;
+  height: 4rem;
   border-radius: 8px;
   display: block;
   object-fit: cover;
@@ -532,21 +515,42 @@ article li:last-child {
   color: var(--ink-dim);
 }
 
+/* The music card groups the real stats.fm link with the real top-artists
+   readout below it (populated by spotify-top.js), one unit instead of two
+   separate cards saying "here's my music" twice. */
+.music-card {
+  display: block;
+  padding: 0;
+  overflow: hidden;
+}
+
+.music-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1.25rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.music-card-header:hover,
+.music-card-header:focus-visible {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
 /* Populated by spotify-top.js from a file a scheduled GitHub Action
    generates from the real Spotify API; hidden (via the `hidden` attribute
    in the markup) until that data actually exists. */
-.top-artists-card {
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.6rem;
-  padding: 0.85rem 1.1rem;
+.top-artists-section {
+  padding: 0.85rem 1.25rem 1rem;
+  border-top: 1px solid var(--rule);
 }
 
 .top-artists-label {
-  margin: 0;
+  margin: 0 0 0.6rem;
   font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  color: var(--ink);
+  font-size: 0.75rem;
+  color: var(--ink-dim);
 }
 
 .top-artists-list {
@@ -567,8 +571,8 @@ article li:last-child {
 }
 
 .top-artists-avatar {
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 2.25rem;
+  height: 2.25rem;
   border-radius: 6px;
   display: block;
   object-fit: cover;
@@ -578,8 +582,98 @@ article li:last-child {
   color: var(--ink);
 }
 
-.top-artists-genre {
+.travel-card {
+  display: block;
+  padding: 1.1rem 1.25rem;
+}
+
+.travel-map {
+  width: 100%;
+  height: 18rem;
+  margin-top: 0.75rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--bg-raised);
+}
+
+/* Leaflet's default popup chrome is white; restyle it to match the site's
+   dark palette instead of a jarring bright box. */
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: var(--bg-raised);
+  color: var(--ink);
+}
+
+.leaflet-popup-content {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.leaflet-container a.leaflet-popup-close-button {
   color: var(--ink-dim);
+}
+
+.travel-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 0.6rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.travel-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.travel-dates {
+  color: var(--ink-dim);
+  flex-shrink: 0;
+}
+
+.travel-place {
+  color: var(--ink);
+}
+
+.travel-tag {
+  margin-left: auto;
+  font-size: 0.6875rem;
+  color: var(--accent);
+}
+
+.concerts-card {
+  display: block;
+  padding: 1.1rem 1.25rem;
+}
+
+.concerts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 0.6rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.concerts-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.concerts-artist {
+  color: var(--ink);
+}
+
+.concerts-place {
+  color: var(--ink-dim);
+  font-size: 0.75rem;
 }
 
 /* The data-science section gets its own accent (teal instead of copper),

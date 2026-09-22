@@ -4,17 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sang Bui</title>
-  <meta name="description" content="Sang Bui — autonomy &amp; robotics research, applied data science, and full-stack AI engineering.">
+  <meta name="description" content="Sang Bui — autonomy &amp; robotics research, applied data science, and full-stack engineering.">
   <meta property="og:title" content="Sang Bui">
-  <meta property="og:description" content="Autonomy &amp; robotics research, applied data science, and full-stack AI engineering — Colorado School of Mines.">
+  <meta property="og:description" content="Autonomy &amp; robotics research, applied data science, and full-stack engineering — Colorado School of Mines.">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Sang Bui">
-  <meta name="twitter:description" content="Autonomy &amp; robotics research, applied data science, and full-stack AI engineering — Colorado School of Mines.">
+  <meta name="twitter:description" content="Autonomy &amp; robotics research, applied data science, and full-stack engineering — Colorado School of Mines.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Martian+Mono:wght@400;500;700&family=Unbounded:wght@600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 <body>
@@ -24,15 +25,11 @@
       <canvas id="ambient-pointcloud" aria-hidden="true"></canvas>
       <div class="side-panel-inner">
         <div class="side-panel-top">
-          <div class="headshot-slot" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <circle cx="12" cy="8.5" r="3.5"/>
-              <path d="M5 20c0-3.6 3.1-6.5 7-6.5s7 2.9 7 6.5"/>
-            </svg>
-          </div>
+          <img class="headshot" src="images/headshot.jpg" alt="Sang Bui">
           <div class="side-panel-top-text">
             <h1 class="side-name">Sang Bui</h1>
-            <p class="side-role">autonomy &amp; robotics &middot; data science &middot; ai engineering</p>
+            <p class="side-role">autonomy &amp; robotics &middot; data science &middot; full-stack engineering</p>
+            <p class="side-location">Currently in Colorado</p>
           </div>
         </div>
 
@@ -50,12 +47,25 @@
         <nav class="side-nav" aria-label="Section">
           <a href="#autonomy">autonomy &amp; robotics</a>
           <a href="#data-science">data science</a>
-          <a href="#ai-engineering">ai engineering</a>
+          <a href="#ai-engineering">full-stack engineering</a>
           <a href="#about">about</a>
         </nav>
         <nav class="side-contact" aria-label="Contact">
-          <a href="mailto:sang_bui@mines.edu">sang_bui@mines.edu</a>
-          <a href="https://linkedin.com/in/buisang" target="_blank" rel="noopener">linkedin.com/in/buisang</a>
+          <a href="mailto:sang_bui@mines.edu" aria-label="Email sang_bui@mines.edu" title="sang_bui@mines.edu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2"/>
+              <path d="M3 7l9 6 9-6"/>
+            </svg>
+          </a>
+          <a href="https://linkedin.com/in/buisang" target="_blank" rel="noopener" aria-label="LinkedIn: linkedin.com/in/buisang" title="linkedin.com/in/buisang">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="3"/>
+              <circle cx="7.5" cy="6.8" r="0.9" fill="currentColor" stroke="none"/>
+              <line x1="7.5" y1="10" x2="7.5" y2="16.5"/>
+              <path d="M11.5 16.5v-4a2.5 2.5 0 0 1 5 0v4"/>
+              <line x1="11.5" y1="10" x2="11.5" y2="16.5"/>
+            </svg>
+          </a>
         </nav>
       </div>
     </header>
@@ -73,7 +83,6 @@
           <p class="section-tag">01 &mdash; autonomy &amp; robotics</p>
         </div>
         <h2>Autonomy &amp; Robotics</h2>
-        <p class="section-thesis">Evaluating and hardening SLAM systems under the conditions that make them fail in practice.</p>
 
         <article>
           <h3>SLAM &amp; Autonomy Research Assistant</h3>
@@ -95,6 +104,11 @@
             <li>Contributed to a 35-page technical analysis report translating SLAM research into engineering recommendations.</li>
           </ul>
         </article>
+
+        <p class="tags">
+          <span>Python</span><span>Bash</span><span>OpenCV</span><span>EVO</span><span>Docker</span><span>Linux</span>
+          <span>Structure PLP-SLAM</span><span>DPVO</span><span>MASt3R-SLAM</span><span>DSO</span>
+        </p>
       </div>
     </section>
 
@@ -108,7 +122,6 @@
           <p class="section-tag">02 &mdash; applied data science</p>
         </div>
         <h2>Applied Data Science</h2>
-        <p class="section-thesis">Reimplementing and extending drought indices used across the climate research community.</p>
 
         <article>
           <h3>Climate Data Guide Data Science Intern</h3>
@@ -149,10 +162,11 @@
             <li>S. Bui and G. Liu, &ldquo;Benchmarking and exploiting resource utilization in cloud gaming: security and privacy challenges,&rdquo; research poster, 2025 Spring Undergraduate Research Symposium, Golden, CO. DOI 10.25676/11124/180538.</li>
           </ul>
 
-          <figure class="poster-figure">
-            <img src="images/spi-spei-drought-trend.png" alt="Chart comparing SPI (precipitation-only) and SPEI (precipitation plus heat) drought indices from 1901 to 2024, with the Dust Bowl era and modern aridification periods highlighted, showing the two indices diverging in recent decades as temperature increasingly drives drought severity.">
-            <figcaption>From &ldquo;The Temperature Penalty&rdquo; poster: SPI vs. SPEI, 1901&ndash;2024.</figcaption>
-          </figure>
+          <a class="poster-link" href="images/spi-spei-drought-trend.png" target="_blank" rel="noopener">
+            <img src="images/spi-spei-drought-trend-thumb.png" alt="Thumbnail of a chart comparing SPI (precipitation-only) and SPEI (precipitation plus heat) drought indices from 1901 to 2024, with the Dust Bowl era and modern aridification periods highlighted, showing the two indices diverging in recent decades as temperature increasingly drives drought severity; opens at full resolution in a new tab.">
+            <span>View the chart &#8599;</span>
+          </a>
+          <p class="poster-link-caption">From &ldquo;The Temperature Penalty&rdquo; poster: SPI vs. SPEI, 1901&ndash;2024.</p>
         </article>
 
         <div class="drought-explorer">
@@ -181,10 +195,9 @@
             <line x1="7" y1="11" x2="17" y2="6.5"/>
             <line x1="7" y1="13" x2="17" y2="17.5"/>
           </svg>
-          <p class="section-tag">03 &mdash; full-stack + ai engineering</p>
+          <p class="section-tag">03 &mdash; full-stack engineering</p>
         </div>
-        <h2>Full-Stack + AI Engineering</h2>
-        <p class="section-thesis">Full-stack systems that turn natural-language questions into real analysis.</p>
+        <h2>Full-Stack Engineering</h2>
 
         <article>
           <h3>Technical Consultant, GenAI Analytics Systems</h3>
@@ -192,14 +205,6 @@
           <ul>
             <li>Designed a generative-AI analytics application translating natural-language questions into SQL queries and data visualizations across enterprise databases supporting 2,000+ internal cellular test systems.</li>
             <li>Built a full-stack application with a React/TypeScript frontend and FastAPI/Python backend, integrating LangChain and LangGraph for multi-step query and visualization workflows.</li>
-          </ul>
-        </article>
-
-        <article>
-          <h3>Foundational Programming Concepts Teaching Assistant</h3>
-          <p class="meta">CS@Mines, Colorado School of Mines &middot; Aug 2024 &ndash; Dec 2025, May 2026 &ndash; present</p>
-          <ul>
-            <li>Supported 75+ students through tutoring, grading, debugging assistance, and written assignment feedback; selected as Lead Teaching Assistant for a summer course offering.</li>
           </ul>
         </article>
 
@@ -225,19 +230,85 @@
         Conduct of Research (RCR) certified.
       </p>
 
+      <article>
+        <h3>Foundational Programming Concepts Teaching Assistant</h3>
+        <p class="meta">CS@Mines, Colorado School of Mines &middot; Aug 2024 &ndash; Dec 2025, May 2026 &ndash; present</p>
+        <ul>
+          <li>Supported 75+ students through tutoring, grading, debugging assistance, and written assignment feedback; selected as Lead Teaching Assistant for a summer course offering.</li>
+        </ul>
+      </article>
+
       <div class="personal">
         <p class="section-tag">beyond the resume</p>
+        <p class="personal-intro">Outside of work, I'm usually either listening to something new or planning the next trip.</p>
         <div class="personal-grid">
-          <a class="personal-card" href="https://stats.fm/user/sangbui" target="_blank" rel="noopener">
-            <img class="personal-card-avatar" src="https://i.scdn.co/image/ab6775700000ee8505b788635ce8012226cab4bc" alt="Sang Bui's stats.fm profile photo">
-            <span class="personal-card-body">
-              <span class="personal-card-label">stats.fm</span>
-              <span class="personal-card-desc">My real listening stats and top artists &#8599;</span>
-            </span>
-          </a>
-          <div id="top-artists-card" class="personal-card top-artists-card" hidden>
-            <p class="top-artists-label">Real top artists, from Spotify</p>
-            <ul id="top-artists-list" class="top-artists-list"></ul>
+          <div class="personal-card music-card">
+            <a class="music-card-header" href="https://stats.fm/user/sangbui" target="_blank" rel="noopener">
+              <img class="personal-card-avatar" src="https://i.scdn.co/image/ab6775700000ee8505b788635ce8012226cab4bc" alt="Sang Bui's stats.fm profile photo">
+              <span class="personal-card-body">
+                <span class="personal-card-label">stats.fm</span>
+                <span class="personal-card-desc">My real listening stats, on stats.fm &#8599;</span>
+              </span>
+            </a>
+            <div id="top-artists-section" class="top-artists-section" hidden>
+              <p id="top-artists-label" class="top-artists-label">Top artists, last 6 months</p>
+              <ul id="top-artists-list" class="top-artists-list"></ul>
+            </div>
+          </div>
+
+          <div class="personal-card travel-card">
+            <p class="personal-card-label">Travel, 2026&ndash;2027</p>
+            <div id="travel-map" class="travel-map" aria-hidden="true"></div>
+            <ul class="travel-list">
+              <li class="travel-item">
+                <span class="travel-dates">Sep 5&ndash;7, 2026</span>
+                <span class="travel-place">Seattle</span>
+              </li>
+              <li class="travel-item">
+                <span class="travel-dates">Sep 18&ndash;21, 2026</span>
+                <span class="travel-place">Las Vegas</span>
+              </li>
+              <li class="travel-item travel-item-upcoming">
+                <span class="travel-dates">Dec 27, 2026 &ndash; Jan 12, 2027</span>
+                <span class="travel-place">Japan</span>
+                <span class="travel-tag">upcoming</span>
+              </li>
+              <li class="travel-item travel-item-upcoming">
+                <span class="travel-dates">Feb 2&ndash;17, 2027</span>
+                <span class="travel-place">Vietnam</span>
+                <span class="travel-tag">upcoming</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="personal-card concerts-card">
+            <p class="personal-card-label">Concerts I&rsquo;ve been to</p>
+            <ul class="concerts-list">
+              <li class="concerts-item">
+                <span class="concerts-artist">Clipse</span>
+                <span class="concerts-place">Mission Ballroom, Denver &middot; Aug 21, 2025</span>
+              </li>
+              <li class="concerts-item">
+                <span class="concerts-artist">Martin Garrix</span>
+                <span class="concerts-place">Red Rocks Amphitheatre, Denver &middot; Oct 24, 2025</span>
+              </li>
+              <li class="concerts-item">
+                <span class="concerts-artist">Denzel Curry + more</span>
+                <span class="concerts-place">Red Rocks Amphitheatre, Denver &middot; Oct 31, 2025</span>
+              </li>
+              <li class="concerts-item">
+                <span class="concerts-artist">Khalid</span>
+                <span class="concerts-place">Red Rocks Amphitheatre, Denver &middot; May 18, 2026</span>
+              </li>
+              <li class="concerts-item">
+                <span class="concerts-artist">wave to earth</span>
+                <span class="concerts-place">WAMU Theater, Seattle &middot; Sep 5, 2026</span>
+              </li>
+              <li class="concerts-item">
+                <span class="concerts-artist">Colorado Symphony: Cirque Cinema (Troupe Vertigo)</span>
+                <span class="concerts-place">Boettcher Concert Hall, Denver &middot; Oct 11, 2025</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -281,9 +352,14 @@
   <script type="module">
     import { initTopArtists } from "./spotify-top.js";
     initTopArtists({
-      card: document.getElementById("top-artists-card"),
+      section: document.getElementById("top-artists-section"),
+      label: document.getElementById("top-artists-label"),
       list: document.getElementById("top-artists-list"),
     });
+  </script>
+  <script type="module">
+    import { initTravelMap } from "./travel-map.js";
+    initTravelMap(document.getElementById("travel-map"));
   </script>
 
 </body>

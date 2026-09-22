@@ -14,7 +14,6 @@ const MILESTONES = [
   { year: "2025", month: 17, role: "SLAM Research Contractor", org: "Spexal SARL", sectionId: "autonomy" },
   { year: "2025", month: 21, role: "Climate Data Guide Data Science Intern", org: "NSF NCAR", sectionId: "data-science" },
   { year: "2026", month: 32, role: "Technical Consultant, GenAI Analytics Systems", org: "Qualcomm Field Session", sectionId: "ai-engineering" },
-  { year: "2027", month: 45, role: "Satellite Systems Engineer Associate (expected)", org: "Lockheed Martin Space", sectionId: "autonomy" },
 ];
 
 const GRADIENT_START = new THREE.Color(0x5b93c9); // --accent, steel blue

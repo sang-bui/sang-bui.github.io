@@ -45,3 +45,11 @@ Restructured the whole page: `.page-shell` grid, a sticky `.side-panel` (point c
 
 - The live GitHub Pages deploy needs to be reconfirmed after each merge (Pages takes a few minutes to redeploy).
 - `verification/`, the video, and peer comments are not started yet.
+
+## Removed: Qualcomm pipeline diagram
+
+The inline-SVG system-architecture diagram added during the v2 craft pass (query → LangGraph → RAG/SQL branch → visualization) was cut after Sang said flatly he didn't like it. Removed the markup and its CSS entirely rather than trying to fix it in place, per the "just start over" instinct from the earlier texture round.
+
+## Planned: interactive NCAR notebook content
+
+Sang wants to bring in Jupyter notebooks from the NSF NCAR drought/PDSI research (confirmed: this is public research, not unpublished work, so it's fair game for the public repo) and turn some of it into real interactive elements on the site, not just described in bullet points. Not started, this is real scope and the deadline is imminent, so it's deliberately being held for after the notebooks are actually provided rather than guessed at now.

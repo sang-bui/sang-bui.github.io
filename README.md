@@ -1,5 +1,7 @@
 # Project 1 - Build Your Personal Website
 
+**Live site: [sang-bui.github.io](https://sang-bui.github.io)**
+
 **CSCI 498E / 598E - Coding with AI Agents**
 
 | | |

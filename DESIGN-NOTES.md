@@ -2,16 +2,16 @@
 
 This is a working trace of the homepage build, kept separate from `DECISIONS.md` (which is Sang's own log, not something Claude fills in). It exists so nothing gets lost before the video and the decision log get written, especially the moments where a direction got built, then overruled or reverted. Sourced from the actual session; nothing here is invented.
 
-## Where things stand right now (as of 2026-09-21, commit `18cacd6`)
+## Where things stand right now (as of 2026-09-21, commit `3d8c65d`)
 
 The rest of this file is a history of how it got here; this section is what's actually live, for anyone (or any new Claude session) picking this up cold.
 
-- **Layout**: fixed-left / scrolling-right, per brittanychiang.com. `.page-shell` (grid) → `.side-panel` (sticky left: point cloud backdrop, name "Sang Bui", role line, vertical nav that highlights the in-view section via `reveal.js`'s `IntersectionObserver`, email + LinkedIn) and `.content-column` (scrolling right: three work sections, about, footer). Collapses to one stacked column under 900px.
-- **Visuals**: one deliberate animated visual, the hero-area SLAM-style point cloud (`pointcloud.js`, Three.js via CDN, explicitly synthetic). No per-section decoration, texture, or diagrams, both of those were tried and removed (see below).
+- **Layout**: fixed-left / scrolling-right, per brittanychiang.com. `.page-shell` (grid) → `.side-panel` (sticky left: point cloud backdrop, name "Sang Bui", role line, vertical nav that highlights the in-view section via `reveal.js`'s `IntersectionObserver`, email + LinkedIn) and `.content-column` (scrolling right: the career timeline, then three work sections, about, footer). Collapses to one stacked column under 900px.
+- **Visuals**: two Three.js scenes, deliberately kept separate rather than merged (see "Explored and reverted" below for why). The hero point cloud (`pointcloud.js`) and, new this round, a SLAM-pose-graph career timeline (`career-timeline.js`) at the top of the content column: six real milestone dates as gradient-colored keyframe markers + edges, an ambient point layer, a ground grid, user-driven `OrbitControls` (no auto-spin), keyboard-accessible. The two scenes share exact point color/size/opacity and nudge each other's rotation slightly when either is drag-orbited, but are not visually linked by any connecting element (tried, didn't work, see below).
 - **Palette**: cool/technical, deep blue-black ground, steel-blue (`--accent`) + ice-cyan (`--accent-2`, scoped to `#data-science` only) accents. Type: Public Sans (body), Martian Mono (labels/data), Unbounded (the name only).
-- **Content**: three work sections (autonomy & robotics, applied data science, full-stack + AI engineering) with real resume-backed bullets, no diagram, no case-study box, no stats strip, no per-section sidebar, all of those existed at some point and were cut. About section has no GPA (Sang's preference). Footer repeats contact links.
-- **Not yet done**: `verification/`, `DECISIONS.md` (all five prompts, Sang's own), the video, peer comments, and the planned NCAR-notebook interactive work (see below, not started).
-- Live at [sang-bui.github.io](https://sang-bui.github.io); `main` branch is the only branch and is fully pushed.
+- **Content**: three work sections (autonomy & robotics, applied data science, full-stack + AI engineering) with real resume-backed bullets, audited against the actual resume PDF for completeness. Data-science section also has an interactive PDSI explorer (`drought-explorer.js`, real values from the reimplementation) and two real artifacts from the NCAR archive (a drought-trend figure, a link to the full PDSI-limitations poster). No stats strip, no per-section sidebar, no pipeline diagram, all of those existed at some point and were cut. About section has no GPA (Sang's preference). Footer repeats contact links.
+- **Not yet done**: `verification/`, `DECISIONS.md` (all five prompts, Sang's own), the video, peer comments.
+- Live at [sang-bui.github.io](https://sang-bui.github.io); `main` branch is the only branch. **Note**: as of this snapshot the latest commit (`3d8c65d`) was just pushed; always check `git log origin/main..HEAD` before assuming everything is synced, a long stretch of work went uncommitted earlier this session before this checkpoint caught it up.
 
 ## Setup
 
@@ -56,9 +56,20 @@ Restructured the whole page: `.page-shell` grid, a sticky `.side-panel` (point c
 
 The inline-SVG system-architecture diagram added during the v2 craft pass (query → LangGraph → RAG/SQL branch → visualization) was cut after Sang said flatly he didn't like it. Removed the markup and its CSS entirely rather than trying to fix it in place, per the "just start over" instinct from the earlier texture round.
 
-## Planned: interactive NCAR notebook content
+## Delivered: interactive NCAR notebook content
 
-Sang wants to bring in Jupyter notebooks from the NSF NCAR drought/PDSI research (confirmed: this is public research, not unpublished work, so it's fair game for the public repo) and turn some of it into real interactive elements on the site, not just described in bullet points. Not started, this is real scope and the deadline is imminent, so it's deliberately being held for after the notebooks are actually provided rather than guessed at now.
+Sang shared an actual Google Drive export of the NSF NCAR research (notebooks, papers, poster files, a 1.5GB dataset). Confirmed public research before using any of it, and kept the whole archive outside any git repo (`work/ncar-source/`), since it also contains copyrighted journal PDFs and private drafts that must never reach the public repo. Extracted real, small, already-computed output from `full_pdsi.ipynb` rather than trying to reprocess the giant dataset client-side or embed a raw screenshot: nine real PDSI values (3 locations × 3 historic dates) became the drought explorer widget; a real poster figure (SPI vs. SPEI) and the full PDSI-limitations poster (rendered from `.pptx` via a fresh LibreOffice install, since the poster is built from ~27 separate embedded images, not one exportable picture) both made it onto the site. A verified live link to the NCAR Climate Data Guide entry (confirmed it actually credits Sang) was added alongside. The CAFEC calibration-coefficient charts from the same notebook were identified as a second usable dataset but not built, one addition was enough for this round.
+
+## Career timeline: several rebuilds, following direct feedback each time
+
+Built, shown, and rebuilt multiple times in direct response to specific feedback, not guessed at repeatedly:
+
+1. **2D SVG**, a wavy path with flat waypoints for the real dated milestones. Feedback: not SLAM-inspired enough, and wanted real 3D the visitor could move around.
+2. **3D Three.js, auto-rotating spheres on a curve**. Feedback: still didn't read as real SLAM output (Sang has looked at many actual SLAM maps), and shouldn't auto-spin, the visitor should control it.
+3. **Rebuilt as a SLAM pose graph**: gradient-colored octahedron "keyframe" markers connected by trajectory edges, an ambient point-cloud layer, a ground reference grid, and real `OrbitControls` (drag to orbit, no auto-rotate), the way real SLAM viewers (RTAB-Map, ORB-SLAM3) actually layer these elements. This version stuck.
+4. **Follow-up design review** (Sang asked for one, plus to run Impeccable) surfaced two real bugs beyond styling: the markers had no keyboard path at all (a canvas can't expose individual 3D objects to assistive tech), and `OrbitControls` sets `touch-action: none` unconditionally, which would have fought normal one-finger page scroll on phones. Fixed both: a set of visually-hidden buttons mirror the hover/click contract for keyboard users, and touch is now two-finger-only for orbit, one-finger scrolls the page normally.
+5. **"Make it feel connected to the hero point cloud"**: matched the timeline's ambient points to the hero's exact color/size/opacity, and added a small cross-module event so dragging the timeline nudges the hero's rotation too.
+6. **Tried and reverted**: a literal SVG line drawn from a fixed point on the sidebar to the timeline's live on-screen position, recomputed every frame. Built and technically working (verified the projection math, the visibility gating, the mobile breakpoint), but Sang's read was "doesn't look continuous, looks like two separate things with a line between them." Removed rather than keep iterating blindly on the same idea; the color-match and motion-sync from step 5 were not flagged as bad and were kept.
 
 ## Process notes (not design, but real)
 
@@ -67,8 +78,9 @@ Sang wants to bring in Jupyter notebooks from the NSF NCAR drought/PDSI research
 
 ## Still open
 
-- `verification/`, the video, and peer comments are not started yet.
-- The interactive NCAR notebook work above.
+- `verification/`, `DECISIONS.md`, the video, and peer comments are not started yet.
+- The CAFEC calibration-coefficient charts (from the same notebook as the drought explorer) were identified as a second usable real dataset but not built.
+- A genuine visual connection between the hero and the timeline is still unsolved; color-match and motion-sync exist, a literal connecting line didn't work.
 
 ## Picking this back up on a different computer
 

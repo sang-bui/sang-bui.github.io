@@ -62,7 +62,11 @@ A check that could not have failed is not a check.
 
 Link to your `verification/` folder.
 
-*Your answer here.*
+To verify that my website was actually working, I ran `curl -sI https://sang-bui.github.io/` in my terminal and checked the live website in Chrome. The curl command returned an HTTP 200 response, which told me that GitHub Pages was successfully serving my website. I also opened the actual URL in my browser and took a screenshot to make sure that the website was displaying correctly, rather than just trusting that Claude had deployed it successfully.
+
+The check would have failed if the website returned a 404 error, or if I opened it in Chrome and saw a blank page, missing styling, or content that did not match what I had built. I think checking both the response from GitHub Pages and the actual website was important, since getting a successful response does not necessarily mean that everything on the website is displaying correctly.
+
+Verification folder: https://github.com/sang-bui/sang-bui.github.io/tree/main/verification
 
 ---
 

@@ -21,14 +21,24 @@
 
   <div class="page-shell">
     <header class="side-panel">
+      <canvas id="ambient-pointcloud" aria-hidden="true"></canvas>
       <div class="side-panel-inner">
         <div class="side-panel-top">
-          <h1 class="side-name">Sang Bui</h1>
-          <p class="side-role">autonomy &amp; robotics &middot; data science &middot; ai engineering</p>
+          <div class="headshot-slot" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="8.5" r="3.5"/>
+              <path d="M5 20c0-3.6 3.1-6.5 7-6.5s7 2.9 7 6.5"/>
+            </svg>
+          </div>
+          <div class="side-panel-top-text">
+            <h1 class="side-name">Sang Bui</h1>
+            <p class="side-role">autonomy &amp; robotics &middot; data science &middot; ai engineering</p>
+          </div>
         </div>
 
         <div class="side-timeline">
           <p class="career-timeline-label">career trajectory</p>
+          <p class="career-timeline-caption">Each point is a real role from my resume. Drag to rotate, hover or click one for details.</p>
           <div class="timeline-canvas-wrap">
             <canvas id="career-timeline-canvas" aria-hidden="true"></canvas>
             <div id="career-timeline-labels" class="timeline-labels"></div>
@@ -63,6 +73,7 @@
           <p class="section-tag">01 &mdash; autonomy &amp; robotics</p>
         </div>
         <h2>Autonomy &amp; Robotics</h2>
+        <p class="section-thesis">Evaluating and hardening SLAM systems under the conditions that make them fail in practice.</p>
 
         <article>
           <h3>SLAM &amp; Autonomy Research Assistant</h3>
@@ -84,11 +95,6 @@
             <li>Contributed to a 35-page technical analysis report translating SLAM research into engineering recommendations.</li>
           </ul>
         </article>
-
-        <article>
-          <h3>Incoming Satellite Systems Engineer Associate</h3>
-          <p class="meta">Lockheed Martin Space, Aurora, CO &middot; Expected Jun 2027</p>
-        </article>
       </div>
     </section>
 
@@ -102,6 +108,7 @@
           <p class="section-tag">02 &mdash; applied data science</p>
         </div>
         <h2>Applied Data Science</h2>
+        <p class="section-thesis">Reimplementing and extending drought indices used across the climate research community.</p>
 
         <article>
           <h3>Climate Data Guide Data Science Intern</h3>
@@ -125,8 +132,13 @@
           <ul>
             <li>Conducted cybersecurity and privacy research examining server resource utilization and related risks in cloud-gaming systems.</li>
             <li>Performed laboratory measurements of server thermal output using FLIR imaging and maintained structured experimental datasets for analysis.</li>
-            <li>Co-created and presented research at the 2025 Spring Undergraduate Research Symposium; preserved with DOI <a href="https://doi.org/10.25676/11124/180538" target="_blank" rel="noopener">10.25676/11124/180538</a>.</li>
+            <li>Co-created and presented research at the 2025 Spring Undergraduate Research Symposium; preserved with DOI <a href="https://doi.org/10.25676/11124/180538" target="_blank" rel="noopener">10.25676/11124/180538 &#8599;</a>.</li>
           </ul>
+
+          <a class="poster-link" href="images/cloud-gaming-poster-full.png" target="_blank" rel="noopener">
+            <img src="images/cloud-gaming-poster-thumb.png" alt="Thumbnail of the research poster, &ldquo;Benchmarking and Exploiting Resource Utilization in Cloud Gaming: Security and Privacy Challenges,&rdquo; the full poster opens at full resolution in a new tab.">
+            <span>View the full poster &#8599;</span>
+          </a>
         </article>
 
         <article>
@@ -134,7 +146,7 @@
           <ul>
             <li>S. Bui and N. Lenssen, &ldquo;The Temperature Penalty: Using SPI and SPEI to Quantify the Impact of Climate Change on 21st-Century Droughts,&rdquo; research poster, Colorado School of Mines and NSF NCAR.</li>
             <li>S. Bui, N. Lenssen, et al., &ldquo;Palmer Drought Severity Index (PDSI),&rdquo; NSF NCAR Climate Data Guide, Oct 2025. <a href="https://climatedataguide.ucar.edu/climate-data/palmer-drought-severity-index-pdsi" target="_blank" rel="noopener">Read it &#8599;</a></li>
-            <li>S. Bui and G. Liu, &ldquo;Benchmarking and exploiting resource utilization in cloud gaming: security and privacy challenges,&rdquo; research poster, 2025 Spring Undergraduate Research Symposium, Golden, CO. DOI <a href="https://doi.org/10.25676/11124/180538" target="_blank" rel="noopener">10.25676/11124/180538</a>.</li>
+            <li>S. Bui and G. Liu, &ldquo;Benchmarking and exploiting resource utilization in cloud gaming: security and privacy challenges,&rdquo; research poster, 2025 Spring Undergraduate Research Symposium, Golden, CO. DOI 10.25676/11124/180538.</li>
           </ul>
 
           <figure class="poster-figure">
@@ -172,6 +184,7 @@
           <p class="section-tag">03 &mdash; full-stack + ai engineering</p>
         </div>
         <h2>Full-Stack + AI Engineering</h2>
+        <p class="section-thesis">Full-stack systems that turn natural-language questions into real analysis.</p>
 
         <article>
           <h3>Technical Consultant, GenAI Analytics Systems</h3>
@@ -179,7 +192,6 @@
           <ul>
             <li>Designed a generative-AI analytics application translating natural-language questions into SQL queries and data visualizations across enterprise databases supporting 2,000+ internal cellular test systems.</li>
             <li>Built a full-stack application with a React/TypeScript frontend and FastAPI/Python backend, integrating LangChain and LangGraph for multi-step query and visualization workflows.</li>
-            <li>Implemented retrieval-augmented generation with a local vector store, containerized with Docker for reproducible deployment.</li>
           </ul>
         </article>
 
@@ -212,6 +224,23 @@
         and analyzed research-cruise and time-series oceanographic data. CITI Responsible
         Conduct of Research (RCR) certified.
       </p>
+
+      <div class="personal">
+        <p class="section-tag">beyond the resume</p>
+        <div class="personal-grid">
+          <a class="personal-card" href="https://stats.fm/user/sangbui" target="_blank" rel="noopener">
+            <img class="personal-card-avatar" src="https://i.scdn.co/image/ab6775700000ee8505b788635ce8012226cab4bc" alt="Sang Bui's stats.fm profile photo">
+            <span class="personal-card-body">
+              <span class="personal-card-label">stats.fm</span>
+              <span class="personal-card-desc">My real listening stats and top artists &#8599;</span>
+            </span>
+          </a>
+          <div id="top-artists-card" class="personal-card top-artists-card" hidden>
+            <p class="top-artists-label">Real top artists, from Spotify</p>
+            <ul id="top-artists-list" class="top-artists-list"></ul>
+          </div>
+        </div>
+      </div>
     </section>
 
       <footer>
@@ -228,6 +257,11 @@
     { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js" } }
   </script>
   <script type="module">
+    import { initAmbientPointCloud } from "./ambient-pointcloud.js";
+    const ambientCanvas = document.getElementById("ambient-pointcloud");
+    if (ambientCanvas) initAmbientPointCloud(ambientCanvas);
+  </script>
+  <script type="module">
     import { initReveal } from "./reveal.js";
     initReveal();
   </script>
@@ -242,6 +276,13 @@
       labelsContainer: document.getElementById("career-timeline-labels"),
       detailEl: document.getElementById("career-timeline-detail"),
       a11yContainer: document.getElementById("career-timeline-a11y"),
+    });
+  </script>
+  <script type="module">
+    import { initTopArtists } from "./spotify-top.js";
+    initTopArtists({
+      card: document.getElementById("top-artists-card"),
+      list: document.getElementById("top-artists-list"),
     });
   </script>
 

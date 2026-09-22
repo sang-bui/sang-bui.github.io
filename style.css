@@ -65,9 +65,8 @@ a:focus-visible {
 
 .page-shell {
   display: grid;
-  /* Widened from the original name/nav/contact sizing (16-26rem) to give
-     the career timeline, now the panel's primary visual, real room. */
-  grid-template-columns: minmax(22rem, 36rem) 1fr;
+  /* Widened per request, more room for the name/timeline/nav column. */
+  grid-template-columns: minmax(26rem, 42rem) 1fr;
   min-height: 100svh;
 }
 
@@ -78,6 +77,19 @@ a:focus-visible {
   overflow: hidden;
   border-right: 1px solid var(--rule);
   background: radial-gradient(ellipse at 50% 30%, var(--bg-raised), var(--bg) 70%);
+}
+
+#ambient-pointcloud {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  /* Quiet backdrop, not the loudest thing on screen; fades toward the
+     panel edges and sits behind the boxed trajectory and sidebar text. */
+  opacity: 0.5;
+  mask-image: radial-gradient(ellipse at 50% 40%, black 45%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 40%, black 45%, transparent 85%);
 }
 
 .side-panel-inner {
@@ -91,13 +103,24 @@ a:focus-visible {
   overflow-y: auto;
 }
 
+.side-panel-top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.side-panel-top .headshot-slot {
+  width: 4.5rem;
+  height: 4.5rem;
+}
+
 .side-name {
   font-family: var(--font-display);
-  font-size: clamp(1.75rem, 2vw + 1rem, 2.5rem);
+  font-size: clamp(1.5rem, 1.8vw + 1rem, 2.25rem);
   line-height: 1.05;
   font-weight: 800;
   letter-spacing: -0.01em;
-  margin: 0 0 0.75rem;
+  margin: 0 0 0.5rem;
   color: var(--ink);
 }
 
@@ -162,27 +185,43 @@ a:focus-visible {
   padding-top: 3rem;
 }
 
-/* ---------- Career timeline (SLAM-trajectory style, in the sidebar) ---------- */
+/* ---------- Career timeline (in the sidebar) ----------
+   Canvas and labels share the same box (timeline-canvas-wrap), so a
+   label's projected position and its actual 3D point always correspond
+   correctly, the original interaction. overflow:hidden on the wrap
+   plus clamping/decluttering in JS (career-timeline.js's updateLabels)
+   keeps labels from spilling out or stacking on each other. */
 
 .side-timeline {
-  display: flex;
-  flex-direction: column;
+  position: relative;
+  z-index: 1;
 }
 
 .career-timeline-label {
-  margin: 0 0 0.75rem;
+  margin: 0 0 0.35rem;
   font-family: var(--font-mono);
   font-size: 0.8125rem;
   color: var(--accent);
 }
 
+.career-timeline-caption {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--ink-dim);
+}
+
 .timeline-canvas-wrap {
   position: relative;
   width: 100%;
-  /* Responsive to viewport height, not just width, since this now shares
-     a fixed-height sidebar with the name, nav, and contact links rather
-     than sitting in the open-ended scrolling content column. */
-  height: clamp(11rem, 26vh, 17rem);
+  height: clamp(14rem, 34vh, 22rem);
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  /* Translucent rather than a solid fill, so the ambient point cloud
+     behind the sidebar shows through the box instead of being blocked. */
+  background: color-mix(in srgb, var(--bg-raised) 55%, transparent);
 }
 
 #career-timeline-canvas {
@@ -207,6 +246,7 @@ a:focus-visible {
   font-size: 0.75rem;
   color: var(--ink-dim);
   white-space: nowrap;
+  pointer-events: none;
   will-change: transform;
 }
 
@@ -275,15 +315,23 @@ a:focus-visible {
 
 .work h2,
 .about h2 {
-  font-size: clamp(1.375rem, 2vw + 1rem, 1.75rem);
-  line-height: 1.3;
+  font-size: clamp(1.75rem, 3vw + 1rem, 2.5rem);
+  line-height: 1.2;
   font-weight: 600;
-  margin: 0 0 2.5rem;
+  margin: 0 0 1rem;
   max-width: 32rem;
 }
 
+.section-thesis {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--ink-dim);
+  margin: 0 0 3rem;
+  max-width: 34rem;
+}
+
 article {
-  margin-bottom: 2.5rem;
+  margin-bottom: 3.5rem;
   padding-left: 1rem;
   border-left: 2px solid var(--rule);
 }
@@ -401,6 +449,136 @@ article li:last-child {
 }
 
 .about p:not(.meta) {
+  color: var(--ink-dim);
+}
+
+/* ---------- Beyond the resume (About section) ----------
+   A small, separate area for personal, non-resume items: a headshot slot
+   (empty until a real photo is added) and cards linking out to real
+   personal profiles, room to add more over time. */
+
+.personal {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+}
+
+.personal-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.headshot-slot {
+  width: 6rem;
+  height: 6rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--rule);
+  border-radius: 10px;
+  background: var(--bg-raised);
+  color: var(--ink-dim);
+}
+
+.headshot-slot svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.personal-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.6rem 1.1rem 0.6rem 0.6rem;
+  background: var(--bg-raised);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  text-decoration: none;
+  transition: border-color 0.2s ease;
+}
+
+.personal-card:hover,
+.personal-card:focus-visible {
+  border-color: var(--accent);
+}
+
+.personal-card-avatar {
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 8px;
+  display: block;
+  object-fit: cover;
+}
+
+.personal-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.personal-card-label {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--ink);
+}
+
+.personal-card-desc {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-dim);
+}
+
+/* Populated by spotify-top.js from a file a scheduled GitHub Action
+   generates from the real Spotify API; hidden (via the `hidden` attribute
+   in the markup) until that data actually exists. */
+.top-artists-card {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.85rem 1.1rem;
+}
+
+.top-artists-label {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--ink);
+}
+
+.top-artists-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.top-artists-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.top-artists-avatar {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 6px;
+  display: block;
+  object-fit: cover;
+}
+
+.top-artists-name {
+  color: var(--ink);
+}
+
+.top-artists-genre {
   color: var(--ink-dim);
 }
 
@@ -559,14 +737,18 @@ footer {
     border-bottom: 1px solid var(--rule);
   }
 
+  .timeline-canvas-wrap {
+    height: 16rem;
+  }
+
+  #ambient-pointcloud {
+    opacity: 0.3;
+  }
+
   .side-panel-inner {
     flex-direction: column;
     gap: 1.75rem;
     padding: 2.5rem 1.5rem;
-  }
-
-  .timeline-canvas-wrap {
-    height: 12rem;
   }
 
   .side-nav {

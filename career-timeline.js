@@ -62,30 +62,35 @@ function gradientColorAt(t) {
   return GRADIENT_START.clone().lerp(GRADIENT_END, t);
 }
 
-// Pose-graph edges: the smoothed trajectory through the milestones,
-// colored along the same time gradient as the markers, not a flat line.
+// Pose-graph edges: the smoothed trajectory through the milestones, given
+// real visual weight as a tube (not a thin wire) so it reads as the primary
+// shape of the scene, colored along the same time gradient as the markers.
 function createTrajectoryEdges(points) {
   const curve = new THREE.CatmullRomCurve3(points);
-  const segments = 140;
-  const curvePoints = curve.getPoints(segments);
+  const tubularSegments = 140;
+  const radius = 0.045;
+  const radialSegments = 8;
+  const geometry = new THREE.TubeGeometry(curve, tubularSegments, radius, radialSegments, false);
 
-  const positions = new Float32Array(curvePoints.length * 3);
-  const colors = new Float32Array(curvePoints.length * 3);
-  curvePoints.forEach((p, i) => {
-    positions[i * 3] = p.x;
-    positions[i * 3 + 1] = p.y;
-    positions[i * 3 + 2] = p.z;
-    const c = gradientColorAt(i / (curvePoints.length - 1));
-    colors[i * 3] = c.r;
-    colors[i * 3 + 1] = c.g;
-    colors[i * 3 + 2] = c.b;
-  });
-
-  const geometry = new THREE.BufferGeometry();
-  geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+  // TubeGeometry lays vertices out ring by ring along the tube (one ring
+  // per tubular segment, radialSegments+1 vertices per ring); color each
+  // ring by its position along the curve so the gradient still reads
+  // correctly despite the geometry being a mesh, not a simple polyline.
+  const verticesPerRing = radialSegments + 1;
+  const colors = new Float32Array(geometry.attributes.position.count * 3);
+  for (let i = 0; i <= tubularSegments; i++) {
+    const c = gradientColorAt(i / tubularSegments);
+    for (let j = 0; j < verticesPerRing; j++) {
+      const idx = (i * verticesPerRing + j) * 3;
+      colors[idx] = c.r;
+      colors[idx + 1] = c.g;
+      colors[idx + 2] = c.b;
+    }
+  }
   geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
-  const material = new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.9 });
-  return { line: new THREE.Line(geometry, material), curve };
+
+  const material = new THREE.MeshBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.92 });
+  return { line: new THREE.Mesh(geometry, material), curve };
 }
 
 // Keyframe markers: faceted octahedra (reads as a sensor pose, not a
@@ -156,7 +161,7 @@ export function initCareerTimeline({ canvas, labelsContainer, detailEl, a11yCont
     scene.background = null;
 
     const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-    camera.position.set(0, 1.4, 7.5);
+    camera.position.set(0, 1.1, 5.5);
     camera.lookAt(0, 0, 0);
 
     let renderer;
@@ -185,8 +190,10 @@ export function initCareerTimeline({ canvas, labelsContainer, detailEl, a11yCont
     controls.enableDamping = !reducedMotion;
     controls.dampingFactor = 0.08;
     controls.enablePan = false;
-    controls.minDistance = 4;
-    controls.maxDistance = 14;
+    // Drag-to-orbit is the whole interaction here; scroll/pinch-to-zoom is
+    // off so scrolling the page over the box never gets captured as a
+    // camera dolly, and the closer starting distance above stays fixed.
+    controls.enableZoom = false;
     controls.autoRotate = false;
     controls.target.set(0, 0, 0);
     // One-finger touch scrolls the page normally; only a two-finger drag
@@ -197,14 +204,6 @@ export function initCareerTimeline({ canvas, labelsContainer, detailEl, a11yCont
     controls.touches.ONE = -1;
     controls.touches.TWO = THREE.TOUCH.ROTATE;
     renderer.domElement.style.touchAction = "pan-y";
-
-    const labelEls = MILESTONES.map((m) => {
-      const el = document.createElement("span");
-      el.className = "timeline-label";
-      el.textContent = m.year;
-      labelsContainer.appendChild(el);
-      return el;
-    });
 
     function resize() {
       const width = container.clientWidth || window.innerWidth;
@@ -222,16 +221,58 @@ export function initCareerTimeline({ canvas, labelsContainer, detailEl, a11yCont
       window.addEventListener("resize", resize);
     }
 
+    const labelEls = MILESTONES.map((m) => {
+      const el = document.createElement("span");
+      el.className = "timeline-label";
+      el.textContent = m.year;
+      labelsContainer.appendChild(el);
+      return el;
+    });
+
+    // The canvas now spans the full sidebar, but the labels stay in a
+    // small, bounded, clipped zone (labelsContainer, styled with
+    // overflow:hidden) so a point that projects near the panel's edges
+    // can never spill its label into the name/nav text. Positions are
+    // still computed live from the real 3D projection each frame (the
+    // original tracking behavior), just clamped into that safe zone
+    // and nudged apart from each other when they'd collide.
+    const LABEL_PAD = 8;
+    const LABEL_MIN_GAP_Y = 18;
+    const LABEL_MIN_GAP_X = 34;
+
     function updateLabels() {
-      const width = container.clientWidth;
-      const height = container.clientHeight;
+      const panelRect = container.getBoundingClientRect();
+      const zoneRect = labelsContainer.getBoundingClientRect();
+      if (zoneRect.width === 0 || zoneRect.height === 0) return;
+
       const worldPos = new THREE.Vector3();
-      markers.forEach((mesh, i) => {
+      const positions = markers.map((mesh) => {
         mesh.getWorldPosition(worldPos);
         const projected = worldPos.clone().project(camera);
-        const x = (projected.x * 0.5 + 0.5) * width;
-        const y = (-projected.y * 0.5 + 0.5) * height;
-        labelEls[i].style.transform = `translate(${x}px, ${y - 22}px)`;
+        const panelX = (projected.x * 0.5 + 0.5) * panelRect.width;
+        const panelY = (-projected.y * 0.5 + 0.5) * panelRect.height;
+        const localX = panelX - (zoneRect.left - panelRect.left);
+        const localY = panelY - (zoneRect.top - panelRect.top);
+        return {
+          x: THREE.MathUtils.clamp(localX, LABEL_PAD, zoneRect.width - LABEL_PAD),
+          y: THREE.MathUtils.clamp(localY, LABEL_PAD, zoneRect.height - LABEL_PAD),
+        };
+      });
+
+      // Simple decluttering pass: nudge a label down when it lands too
+      // close to one already placed, instead of letting them stack.
+      for (let i = 0; i < positions.length; i++) {
+        for (let j = 0; j < i; j++) {
+          const dx = Math.abs(positions[i].x - positions[j].x);
+          const dy = Math.abs(positions[i].y - positions[j].y);
+          if (dx < LABEL_MIN_GAP_X && dy < LABEL_MIN_GAP_Y) {
+            positions[i].y = Math.min(positions[j].y + LABEL_MIN_GAP_Y, zoneRect.height - LABEL_PAD);
+          }
+        }
+      }
+
+      positions.forEach((p, i) => {
+        labelEls[i].style.transform = `translate(${p.x}px, ${p.y}px)`;
       });
     }
 
@@ -298,6 +339,13 @@ export function initCareerTimeline({ canvas, labelsContainer, detailEl, a11yCont
       if (hit) goToSection(hit.userData.milestone);
     });
 
+    // The 3D scene itself has no keyboard path (a canvas can't expose
+    // individual markers to assistive tech), and free-floating projected
+    // labels drifted wherever the camera happened to point, risking
+    // overlap with each other and the surrounding text. One set of real,
+    // visible buttons in a fixed, contained area solves both: a legible,
+    // bounded readout that's also the keyboard/screen-reader path,
+    // mirroring the same hover/focus/click contract the 3D markers use.
     // The 3D scene itself has no keyboard path (a canvas can't expose
     // individual markers to assistive tech), so a real, focusable button
     // per milestone provides the same detail-on-focus / activate-to-scroll

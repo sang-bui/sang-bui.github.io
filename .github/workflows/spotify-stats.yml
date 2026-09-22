@@ -1,0 +1,57 @@
+name: Update Spotify top artists
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  update-top-artists:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch top artists from Spotify and write spotify-top-artists.json
+        env:
+          SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+          SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
+          SPOTIFY_REFRESH_TOKEN: ${{ secrets.SPOTIFY_REFRESH_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          access_token=$(curl -sS -X POST https://accounts.spotify.com/api/token \
+            -d grant_type=refresh_token \
+            -d refresh_token="$SPOTIFY_REFRESH_TOKEN" \
+            -u "$SPOTIFY_CLIENT_ID:$SPOTIFY_CLIENT_SECRET" \
+            | jq -r '.access_token')
+
+          if [ -z "$access_token" ] || [ "$access_token" = "null" ]; then
+            echo "Failed to obtain a Spotify access token." >&2
+            exit 1
+          fi
+
+          curl -sS "https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=6" \
+            -H "Authorization: Bearer $access_token" \
+            | jq '{
+                updated_at: now | todate,
+                artists: [.items[] | {
+                  name: .name,
+                  genre: (.genres[0] // null),
+                  image: (.images | sort_by(.width) | .[0].url // null)
+                }]
+              }' > spotify-top-artists.json
+
+      - name: Commit spotify-top-artists.json if it changed
+        run: |
+          if ! git diff --quiet -- spotify-top-artists.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add spotify-top-artists.json
+            git commit -m "Update Spotify top artists"
+            git push
+          else
+            echo "No change in spotify-top-artists.json"
+          fi

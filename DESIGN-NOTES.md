@@ -10,13 +10,13 @@ This is a working trace of the homepage build, kept separate from `DECISIONS.md`
 
 ## v1: dark minimal build
 
-Hero point cloud (Three.js, synthetic SLAM-style point cloud + trajectory, explicitly labeled as not real research data in code) plus three work sections. Passed `impeccable detect` after fixing an all-caps/wide-letter-spacing readability warning on the section labels.
+Hero point cloud (Three.js, synthetic SLAM-style point cloud + trajectory, explicitly labeled as not real research data in code) plus three work sections. Passed `impeccable detect` after fixing an all-caps/wide-letter-spacing readability warning on the section labels. GPA is intentionally left off the education section, Sang's preference, noted as a standing constraint in `PRODUCT.md` so it doesn't quietly get reintroduced later.
 
 ## v2: craft pass
 
 - Typography: swapped Archivo + JetBrains Mono (flagged by Sang as "generic, I've seen it everywhere") for Public Sans + Martian Mono, justified by the NSF NCAR / Lockheed Martin Space subject matter rather than picked arbitrarily.
-- Added the Qualcomm GenAI pipeline diagram (a real system-architecture case study) and a stats strip.
-- **Pivot 1**: the hero's tagline sentence ("I build systems that turn data into decisions.") was flagged as reading like a sales pitch, not a personal statement. Rewritten to a statement-style hero: name at full scale, fragment tags instead of a sentence.
+- Added the Qualcomm GenAI pipeline diagram (a real system-architecture case study, later removed, see below) and a stats strip. Also added a favicon (reusing the section-icon line art) and basic Open Graph/Twitter meta tags so the link previews properly when pasted into the Canvas discussion.
+- **Pivot 1**: the hero's tagline sentence ("I build systems that turn data into decisions.") was flagged as reading like a sales pitch, not a personal statement. Rewritten to a statement-style hero: name at full scale, fragment tags instead of a sentence. A second accent color (`--accent-2`, teal) was also introduced here, scoped to the data-science section only (via a local CSS custom-property override), so the palette had some range instead of one accent used everywhere.
 - **Pivot 2**: the resulting giant hero name (up to 9rem, same mono font as every label) and fully centered page layout were flagged as too large and too symmetric ("why are we so obsessed with things being centered"). Replaced with a real display font (Unbounded, chosen for its space-poster character, tied to the Lockheed Martin Space content) at a smaller scale, and the whole page (hero, stats, sections, footer) shifted to a consistent left-anchored offset instead of centered blocks.
 - **Pivot 3**: the stats strip itself was cut entirely ("empty flexing," not real proof) and the warm copper/charcoal palette was called "boring." Replaced with a cooler, more clinical palette (steel blue + ice cyan on deep blue-black) across the CSS, the point cloud's colors, and the favicon.
 - **Pivot 4**: the section subheadings ("Research that gets systems to know where they are.") were flagged as corny for the same reason as the original hero tagline. Cut to plain section names. Also fixed a layout bug where the section background/texture was capped to the same narrow box as the text, leaving the right side of wide screens visually dead.
@@ -41,11 +41,6 @@ Before committing to a direction, searched general portfolio-design inspiration 
 
 Restructured the whole page: `.page-shell` grid, a sticky `.side-panel` (point cloud as a contained backdrop, name, vertical nav with scroll-linked active-section highlighting via `IntersectionObserver`, contact links) on the left, and `.content-column` (all three work sections, about, footer) scrolling on the right. The old JS-injected top nav (`reveal.js`'s `buildNav`) was removed in favor of real, always-present static nav markup, more robust and closer to the course's "verify it actually works" spirit than a script-built one. The per-section side-stat cards from the previous round were removed since the persistent sidebar replaces that job.
 
-## Still open
-
-- The live GitHub Pages deploy needs to be reconfirmed after each merge (Pages takes a few minutes to redeploy).
-- `verification/`, the video, and peer comments are not started yet.
-
 ## Removed: Qualcomm pipeline diagram
 
 The inline-SVG system-architecture diagram added during the v2 craft pass (query → LangGraph → RAG/SQL branch → visualization) was cut after Sang said flatly he didn't like it. Removed the markup and its CSS entirely rather than trying to fix it in place, per the "just start over" instinct from the earlier texture round.
@@ -53,3 +48,13 @@ The inline-SVG system-architecture diagram added during the v2 craft pass (query
 ## Planned: interactive NCAR notebook content
 
 Sang wants to bring in Jupyter notebooks from the NSF NCAR drought/PDSI research (confirmed: this is public research, not unpublished work, so it's fair game for the public repo) and turn some of it into real interactive elements on the site, not just described in bullet points. Not started, this is real scope and the deadline is imminent, so it's deliberately being held for after the notebooks are actually provided rather than guessed at now.
+
+## Process notes (not design, but real)
+
+- The [Impeccable](https://github.com/pbakaus/impeccable) skill was installed twice: first scoped to this project, which silently failed to register in the running Claude Code session because project-level skill discovery only happens from the directory a session actually launches in, not a subdirectory `cd`'d into afterward. Reinstalled globally, which worked immediately. A real troubleshooting moment, not a clean first try.
+- Claude briefly mis-marked the project's "Started" date in the private progress checklist as the day a late-session commit happened, rather than the actual first commit date; Sang caught it ("we did not start that late") and it was corrected by checking `git log` directly instead of assuming.
+
+## Still open
+
+- `verification/`, the video, and peer comments are not started yet.
+- The interactive NCAR notebook work above.

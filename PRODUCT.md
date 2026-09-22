@@ -46,12 +46,12 @@ Real, usable content from `Resume.pdf` (gitignored, local only):
 
 - Education: B.S. Computer Science, Data Science specialization, Colorado School of Mines, Aug 2023 - Dec 2026, GPA 3.662. Honors: C-MAPP Scholar (2x), MURF Scholar (2x), SURF Scholar, FIRST Scholar.
 - Research: SLAM & Autonomy Research Assistant (ARIA Lab, Nov 2023 - May 2026); Climate Data Guide Data Science Intern (NSF NCAR, Jun 2025 - May 2026); Computer Resource Utilization Research Assistant (CS@Mines, Sep 2023 - May 2025).
-- Professional: Technical Consultant, GenAI Analytics Systems (Qualcomm Field Session, May-Jun 2026); SLAM Research Contractor (Spexal SARL, Feb-Jul 2025); Foundational Programming Concepts TA (CS@Mines, Aug 2024-Dec 2025, May 2026-present); Incoming Satellite Systems Engineer Associate (Lockheed Martin Space, expected Jun 2027).
+- Professional: Technical Consultant, GenAI Analytics Systems (Qualcomm Field Session, May-Jun 2026); SLAM Research Contractor (Spexal SARL, Feb-Jul 2025); Foundational Programming Concepts TA (CS@Mines, Aug 2024-Dec 2025, May 2026-present). Note: an incoming Satellite Systems Engineer Associate role at Lockheed Martin Space was on the resume but removed from the site at the student's explicit request; don't reintroduce it without asking.
 - Research outputs: "The Temperature Penalty" (poster, Mines/NSF NCAR); "Benchmarking and exploiting resource utilization in cloud gaming" (poster, DOI 10.25676/11124/180538); "Palmer Drought Severity Index (PDSI)" (NSF NCAR Climate Data Guide, Oct 2025).
 - Professional development: MATE FLOATS Marine Technology Workshop (Univ. of Washington, Aug 2025).
 - Technical skills: Python, C++, SQL, Java, R, Bash, TypeScript; NumPy/pandas/SciPy/scikit-learn/TensorFlow/Dask/xarray/NetCDF/OpenCV/EVO; FastAPI/Flask/React/LangChain/LangGraph/RAG/vector databases; Git/Docker/Linux/Conda/HPC/Jupyter/JIRA.
 
-State absence: no professional photography, headshot, or other media assets on hand yet; do not fabricate a headshot or stock imagery in its place.
+A real headshot photo (`images/headshot.jpg`) was later provided by the student and is live in the sidebar; still never fabricate a headshot or stock imagery for any other purpose.
 
 ## Product Principles
 

@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-29T21:59:41Z",
+  "updated_at": "2026-09-30T03:38:07Z",
   "artists": [
     {
       "name": "Lucky Daye",
@@ -27,9 +27,9 @@
       "image": "https://i.scdn.co/image/ab6761610000f1786921bdf2ddc6e84970fd172e"
     },
     {
-      "name": "Kanye West",
-      "genre": "rap",
-      "image": "https://i.scdn.co/image/ab6761610000f1786e835a500e791bf9c27a422a"
+      "name": "GIVĒON",
+      "genre": "r&b",
+      "image": "https://i.scdn.co/image/ab6761610000f178e357870455bc56f7ef4147f8"
     }
   ]
 }

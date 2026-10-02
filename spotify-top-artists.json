@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-01T22:16:20Z",
+  "updated_at": "2026-10-02T03:42:27Z",
   "artists": [
     {
       "name": "Lucky Daye",
@@ -27,9 +27,9 @@
       "image": "https://i.scdn.co/image/ab6761610000f1786921bdf2ddc6e84970fd172e"
     },
     {
-      "name": "GIVĒON",
-      "genre": "r&b",
-      "image": "https://i.scdn.co/image/ab6761610000f178e357870455bc56f7ef4147f8"
+      "name": "Drake",
+      "genre": "rap",
+      "image": "https://i.scdn.co/image/ab6761610000f1784293385d324db8558179afd9"
     }
   ]
 }

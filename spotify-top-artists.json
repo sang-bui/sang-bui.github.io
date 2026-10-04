@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-03T20:29:54Z",
+  "updated_at": "2026-10-04T03:54:52Z",
   "artists": [
     {
       "name": "Lucky Daye",
@@ -22,14 +22,14 @@
       "image": "https://i.scdn.co/image/ab6761610000f178c6c4f4aaf40ebee92b8a8228"
     },
     {
-      "name": "Khamari",
-      "genre": "indie r&b",
-      "image": "https://i.scdn.co/image/ab6761610000f1786921bdf2ddc6e84970fd172e"
-    },
-    {
       "name": "Drake",
       "genre": "rap",
       "image": "https://i.scdn.co/image/ab6761610000f1784293385d324db8558179afd9"
+    },
+    {
+      "name": "Khamari",
+      "genre": "indie r&b",
+      "image": "https://i.scdn.co/image/ab6761610000f1786921bdf2ddc6e84970fd172e"
     }
   ]
 }

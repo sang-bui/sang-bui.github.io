@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-09T22:08:41Z",
+  "updated_at": "2026-10-10T03:57:36Z",
   "artists": [
     {
       "name": "Lucky Daye",
@@ -7,14 +7,14 @@
       "image": "https://i.scdn.co/image/ab6761610000f178b5a3c08b793ddef890d04133"
     },
     {
-      "name": "wave to earth",
-      "genre": null,
-      "image": "https://i.scdn.co/image/ab6761610000f17811fa75d331351ecfc2e93faf"
-    },
-    {
       "name": "Don Toliver",
       "genre": null,
       "image": "https://i.scdn.co/image/ab6761610000f178c52b798deb89eb8414a51b7b"
+    },
+    {
+      "name": "wave to earth",
+      "genre": null,
+      "image": "https://i.scdn.co/image/ab6761610000f17811fa75d331351ecfc2e93faf"
     },
     {
       "name": "Leon Thomas",
